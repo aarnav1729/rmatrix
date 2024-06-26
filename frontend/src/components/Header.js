@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom'
 
 const Header = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = React.useState('');
 
   const handleSearch = () => {
     onSearch(searchTerm);
@@ -9,7 +10,7 @@ const Header = ({ onSearch }) => {
 
   return (
     <header className="bg-gray-800 p-4 flex justify-between items-center">
-      <div className="text-2xl font-bold">RM Racking</div>
+      <Link to="/" className="text-2xl font-bold">RM Racking</Link>
 
       <div className="flex">
         <input

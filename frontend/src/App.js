@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import RackingSystem from './components/RackingSystem';
+import Info from './components/Info';
 
 function App() {
   const [racks, setRacks] = useState([]);
@@ -35,8 +37,15 @@ function App() {
     <div className="App flex flex-col min-h-screen bg-gray-900 text-white">
       <Header onSearch={handleSearch} />
       <main className="flex-grow p-4">
-        <Dashboard total={totalSpots} open={openSpots} occupied={occupiedSpots} />
-        <RackingSystem racks={racks} fetchRacks={fetchRacks} />
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Dashboard total={totalSpots} open={openSpots} occupied={occupiedSpots} />
+              <RackingSystem racks={racks} fetchRacks={fetchRacks} />
+            </>
+          } />
+          <Route path="/info" element={<Info />} />
+        </Routes>
       </main>
       <Footer />
     </div>
