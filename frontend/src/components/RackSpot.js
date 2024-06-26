@@ -9,6 +9,11 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks }) => {
   }, [packages]);
 
   const handleAdd = async () => {
+    if (qrCodes.length >= 2) {
+      alert('Each spot can only hold a maximum of 2 QR codes.');
+      return;
+    }
+
     const qrCode = prompt('Enter QR Code:');
     if (qrCode) {
       await axios.post('http://localhost:5000/api/racks', {
