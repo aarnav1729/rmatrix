@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const RackSpot = ({ stack, packages }) => {
+const RackSpot = ({ stack, packages, column, row, fetchRacks }) => {
   const [qrCodes, setQrCodes] = useState(packages);
+
+  useEffect(() => {
+    setQrCodes(packages);
+  }, [packages]);
 
   const handleAdd = async () => {
     const qrCode = prompt('Enter QR Code:');
     if (qrCode) {
-      const response = await axios.post('http://localhost:5000/api/racks', {
-        column: 'B1', // Update with dynamic column
-        row: 1, // Update with dynamic row
+      await axios.post('http://localhost:5000/api/racks', {
+        column,
+        row,
         stack,
         qrCode
       });
-      setQrCodes([...qrCodes, qrCode]);
+      fetchRacks();
     }
   };
 
@@ -21,13 +25,13 @@ const RackSpot = ({ stack, packages }) => {
     const qrCode = qrCodes[index];
     await axios.delete('http://localhost:5000/api/racks', {
       data: {
-        column: 'B1', // Update with dynamic column
-        row: 1, // Update with dynamic row
+        column,
+        row,
         stack,
         qrCode
       }
     });
-    setQrCodes(qrCodes.filter((_, i) => i !== index));
+    fetchRacks();
   };
 
   return (

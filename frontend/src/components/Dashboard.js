@@ -1,0 +1,33 @@
+import React from 'react';
+
+const Dashboard = ({ total, open, occupied }) => {
+  const percentageOccupied = ((occupied / total) * 100).toFixed(2);
+
+  return (
+    <div className="bg-gray-800 p-4 rounded-lg mb-4">
+      <h2 className="text-xl font-bold mb-4">Project Tasks</h2>
+      <div className="flex justify-around items-center">
+        <div>
+          <div className="text-3xl font-bold">{occupied}</div>
+          <div>Occupied</div>
+        </div>
+        <div>
+          <div className="text-3xl font-bold">{open}</div>
+          <div>Open</div>
+        </div>
+        <div>
+          <div className="text-3xl font-bold">{total}</div>
+          <div>Total Spots</div>
+        </div>
+        <div className="relative">
+          <div className="w-24 h-24 rounded-full border-4 border-blue-500 relative flex items-center justify-center">
+            <div className="text-xl font-bold">{percentageOccupied}%</div>
+          </div>
+          <div className="absolute inset-0 rounded-full border-4 border-gray-700"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;

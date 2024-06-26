@@ -14,9 +14,9 @@ const SearchBar = ({ onSearch }) => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Enter QR Code"
-        className="border p-2 mr-2"
+        className="bg-gray-700 p-2 mr-2 rounded"
       />
-      <button onClick={handleSearch} className="bg-blue-500 text-white p-2">Search</button>
+      <button onClick={handleSearch} className="bg-blue-500 text-white p-2 rounded">Search</button>
     </div>
   );
 };
