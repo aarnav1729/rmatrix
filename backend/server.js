@@ -6,12 +6,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Update MongoDB connection string
 const mongoURI = 'mongodb+srv://aarnavsingh836:Cucumber1729@rr.oldse8x.mongodb.net/rackingSystem?retryWrites=true&w=majority&appName=rr';
 
-// Connect to MongoDB
 mongoose.connect(mongoURI, {
-  // The options useNewUrlParser and useUnifiedTopology are no longer needed and have been removed
 });
 
 const rackSchema = new mongoose.Schema({

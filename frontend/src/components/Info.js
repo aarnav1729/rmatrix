@@ -6,9 +6,12 @@ const Info = () => {
     <div className="flex flex-col min-h-screen bg-gray-900 text-white">
       <main className="flex-grow p-4">
         <div className="bg-gray-800 p-4 rounded-lg text-white">
-        <Link to="/" className="bg-blue-500 text-white p-2 rounded inline-flex w-full items-center">
+          <Link
+            to="/"
+            className="bg-blue-500 text-white p-2 rounded inline-flex w-full items-center"
+          >
             <i className="fas fa-arrow-left"></i>
-        </Link>
+          </Link>
           <h1 className="text-2xl font-bold mb-4 mt-4">
             Racking System Application
           </h1>
@@ -107,6 +110,13 @@ const Info = () => {
             The application is fully responsive, adapting to different screen
             sizes using Tailwind CSS classes for media queries.
           </p>
+
+          <Link
+            to="/"
+            className="bg-blue-500 text-white p-2 rounded inline-flex w-full items-center"
+          >
+            <i className="fas fa-arrow-left"></i>
+          </Link>
         </div>
       </main>
     </div>
