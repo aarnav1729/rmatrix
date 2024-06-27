@@ -15,12 +15,12 @@ function App() {
   }, []);
 
   const fetchRacks = async () => {
-    const response = await axios.get('http://localhost:5000/api/racks');
+    const response = await axios.get('https://rmatrix.onrender.com/api/racks');
     setRacks(response.data);
   };
 
   const handleSearch = (qrCode) => {
-    axios.get(`http://localhost:5000/api/racks/search?qrCode=${qrCode}`)
+    axios.get(`https://rmatrix.onrender.com/api/racks/search?qrCode=${qrCode}`)
       .then(response => {
         alert(`QR Code found at: ${response.data.location}`);
       })
