@@ -19,11 +19,10 @@ const Dashboard = ({ total, open, occupied }) => {
           <div className="text-3xl font-bold">{total}</div>
           <div>Total Spots</div>
         </div>
-        <div className="relative flex flex-col items-center">
+        <div className="flex flex-col items-center">
           <div className="w-24 h-24 rounded-full border-4 border-blue-500 flex items-center justify-center">
             <div className="text-xl font-bold">{percentageOccupied}%</div>
           </div>
-          <div className="absolute inset-0 rounded-full border-4 border-gray-700"></div>
         </div>
       </div>
     </div>
