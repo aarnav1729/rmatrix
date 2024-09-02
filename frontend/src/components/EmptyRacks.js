@@ -6,6 +6,7 @@ const EmptyRacks = ({ racks, fetchRacks }) => {
     return <p>Error: Invalid racks data.</p>; // Handle invalid data
   }
 
+  // Filter racks with fewer than 2 packages
   const emptyRacks = racks.filter(rack => rack.packages.length < 2);
   console.log('Empty Racks:', emptyRacks); // Debugging log
 

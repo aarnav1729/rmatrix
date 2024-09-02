@@ -6,6 +6,7 @@ const OccupiedRacks = ({ racks, fetchRacks }) => {
     return <p>Error: Invalid racks data.</p>; // Handle invalid data
   }
 
+  // Filter racks with exactly 2 packages (fully occupied)
   const occupiedRacks = racks.filter(rack => rack.packages.length === 2);
   console.log('Occupied Racks:', occupiedRacks); // Debugging log
 
