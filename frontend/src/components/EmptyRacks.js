@@ -3,14 +3,14 @@ import RackingSystem from './RackingSystem';
 
 const EmptyRacks = ({ racks, fetchRacks }) => {
   if (!racks || !Array.isArray(racks)) {
-    return <p>Error: Invalid racks data.</p>; // Handle invalid data
+    console.log('Invalid racks data:', racks); // Debugging output
+    return <p>Error: Invalid racks data.</p>;
   }
 
-  // Filter racks with fewer than 2 packages
-  const emptyRacks = racks.filter(rack => rack.packages.length < 2);
-  console.log('Empty Racks:', emptyRacks); // Debugging log
+  // Filter racks with fewer than 2 packages (empty or partially filled)
+  const emptyRacks = racks.filter(rack => Array.isArray(rack.packages) && rack.packages.length < 2);
+  console.log('Filtered Empty Racks:', emptyRacks); // Debugging log
 
-  // Check if any empty racks are found
   if (emptyRacks.length === 0) {
     return <p>No empty racks available.</p>;
   }

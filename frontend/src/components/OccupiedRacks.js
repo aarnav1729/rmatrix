@@ -3,14 +3,14 @@ import RackingSystem from './RackingSystem';
 
 const OccupiedRacks = ({ racks, fetchRacks }) => {
   if (!racks || !Array.isArray(racks)) {
-    return <p>Error: Invalid racks data.</p>; // Handle invalid data
+    console.log('Invalid racks data:', racks); // Debugging output
+    return <p>Error: Invalid racks data.</p>;
   }
 
   // Filter racks with exactly 2 packages (fully occupied)
-  const occupiedRacks = racks.filter(rack => rack.packages.length === 2);
-  console.log('Occupied Racks:', occupiedRacks); // Debugging log
+  const occupiedRacks = racks.filter(rack => Array.isArray(rack.packages) && rack.packages.length === 2);
+  console.log('Filtered Occupied Racks:', occupiedRacks); // Debugging log
 
-  // Check if any occupied racks are found
   if (occupiedRacks.length === 0) {
     return <p>No occupied racks available.</p>;
   }
