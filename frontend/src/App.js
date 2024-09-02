@@ -6,24 +6,39 @@ import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import RackingSystem from './components/RackingSystem';
 import Info from './components/Info';
+import EmptyRacks from './components/EmptyRacks';
+import OccupiedRacks from './components/OccupiedRacks';
 
 function App() {
   const [racks, setRacks] = useState([]);
+  const [emptyRacks, setEmptyRacks] = useState([]); // State for empty racks
+  const [occupiedRacks, setOccupiedRacks] = useState([]); // State for occupied racks
 
   useEffect(() => {
     fetchRacks();
   }, []);
 
+  // Fetch racks data and update state
   const fetchRacks = async () => {
     try {
       const response = await axios.get('https://rmatrix.onrender.com/api/racks');
-      setRacks(response.data); 
-      console.log('Fetched Racks:', response.data); // Add this line for debugging
+      setRacks(response.data);
+      console.log('Fetched Racks:', response.data);
+      filterRacks(response.data); // Call filterRacks after fetching
     } catch (error) {
       console.error('Error fetching racks:', error);
     }
   };
-  
+
+  // Filter racks into empty and occupied arrays
+  const filterRacks = (racksData) => {
+    const empty = racksData.filter(rack => Array.isArray(rack.packages) && rack.packages.length < 2);
+    const occupied = racksData.filter(rack => Array.isArray(rack.packages) && rack.packages.length === 2);
+    setEmptyRacks(empty);
+    setOccupiedRacks(occupied);
+    console.log('Filtered Empty Racks:', empty); // Debugging log
+    console.log('Filtered Occupied Racks:', occupied); // Debugging log
+  };
 
   const handleSearch = (qrCode) => {
     axios.get(`https://rmatrix.onrender.com/api/racks/search?qrCode=${qrCode}`)
@@ -51,6 +66,9 @@ function App() {
             </>
           } />
           <Route path="/info" element={<Info />} />
+          {/* Pass filtered racks to EmptyRacks and OccupiedRacks */}
+          <Route path="/empty-racks" element={<EmptyRacks racks={emptyRacks} />} />
+          <Route path="/occupied-racks" element={<OccupiedRacks racks={occupiedRacks} />} />
         </Routes>
       </main>
       <Footer />
