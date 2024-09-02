@@ -6,8 +6,8 @@ import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import RackingSystem from './components/RackingSystem';
 import Info from './components/Info';
-import EmptyRacks from './components/EmptyRacks';
-import OccupiedRacks from './components/OccupiedRacks';
+import EmptyRacks from './components/EmptyRacks'; // Correct import
+import OccupiedRacks from './components/OccupiedRacks'; // Correct import
 
 function App() {
   const [racks, setRacks] = useState([]);
@@ -23,7 +23,7 @@ function App() {
     try {
       const response = await axios.get('https://rmatrix.onrender.com/api/racks');
       setRacks(response.data);
-      console.log('Fetched Racks:', response.data);
+      console.log('Fetched Racks:', response.data); // Debugging log
       filterRacks(response.data); // Call filterRacks after fetching
     } catch (error) {
       console.error('Error fetching racks:', error);
