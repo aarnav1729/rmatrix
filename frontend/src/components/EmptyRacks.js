@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import RackingSystem from './RackingSystem';
 
-const EmptyRacks = ({ racks, fetchRacks }) => {
+const EmptyRacks = () => {
   const [emptyRacks, setEmptyRacks] = useState([]);
 
-  useEffect(() => {
-    // Check if racks is an array and filter correctly
-    if (racks && Array.isArray(racks)) {
+  const fetchRacks = async () => {
+    try {
+      const response = await axios.get('https://rmatrix.onrender.com/api/racks');
+      const racks = response.data;
+      // Filter only empty racks
       const filteredRacks = racks.filter(rack => Array.isArray(rack.packages) && rack.packages.length < 2);
       setEmptyRacks(filteredRacks);
       console.log('Filtered Empty Racks:', filteredRacks); // Debugging log
+    } catch (error) {
+      console.error('Error fetching racks:', error);
     }
-  }, [racks]);
+  };
+
+  useEffect(() => {
+    fetchRacks(); // Fetch racks when component mounts
+  }, []);
 
   return (
     <div>
