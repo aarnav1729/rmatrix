@@ -7,15 +7,17 @@ const EmptyRacks = () => {
   const [loading, setLoading] = useState(true); // Loading state to manage async fetch
 
   const fetchRacks = async () => {
+    console.log('Fetching racks for EmptyRacks...'); // Debugging log
     try {
       const response = await axios.get('https://rmatrix.onrender.com/api/racks'); // Ensure this URL is correct
+      console.log('API Response for EmptyRacks:', response.data); // Debugging log
       const racks = response.data || []; // Ensure data is an array
       // Filter only empty racks
       const filteredRacks = racks.filter(rack => Array.isArray(rack.packages) && rack.packages.length < 2);
       setEmptyRacks(filteredRacks);
       console.log('Filtered Empty Racks:', filteredRacks); // Debugging log
     } catch (error) {
-      console.error('Error fetching racks:', error);
+      console.error('Error fetching racks in EmptyRacks:', error); // Handle and log errors properly
     } finally {
       setLoading(false); // End loading state
     }
