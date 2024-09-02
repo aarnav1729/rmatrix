@@ -6,6 +6,10 @@ const RackingSystem = ({ racks, fetchRacks }) => {
 
   console.log('RackingSystem - Received Racks:', racks); // Debugging log
 
+  if (!racks || racks.length === 0) {
+    return <p>No racks to display.</p>;
+  }
+
   return (
     <div className="racking-system grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {columns.map(column => {
