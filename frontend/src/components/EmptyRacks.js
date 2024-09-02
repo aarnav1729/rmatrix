@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import RackingSystem from './RackingSystem';
 
 const EmptyRacks = ({ racks, fetchRacks }) => {
-  if (!racks || !Array.isArray(racks)) {
-    console.log('Invalid racks data:', racks); // Debugging output
-    return <p>Error: Invalid racks data.</p>;
-  }
+  const [emptyRacks, setEmptyRacks] = useState([]);
 
-  // Filter racks with fewer than 2 packages (empty or partially filled)
-  const emptyRacks = racks.filter(rack => Array.isArray(rack.packages) && rack.packages.length < 2);
-  console.log('Filtered Empty Racks:', emptyRacks); // Debugging log
+  useEffect(() => {
+    if (racks && Array.isArray(racks)) {
+      const filteredRacks = racks.filter(rack => Array.isArray(rack.packages) && rack.packages.length < 2);
+      setEmptyRacks(filteredRacks);
+      console.log('Filtered Empty Racks:', filteredRacks); // Debugging log
+    }
+  }, [racks]);
 
-  if (emptyRacks.length === 0) {
+  if (!emptyRacks || emptyRacks.length === 0) {
     return <p>No empty racks available.</p>;
   }
 
