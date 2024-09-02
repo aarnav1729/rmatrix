@@ -2,14 +2,17 @@ import React from 'react';
 import RackingSystem from './RackingSystem';
 
 const OccupiedRacks = ({ racks, fetchRacks }) => {
-  // Ensure racks is not undefined or null
   if (!racks || !Array.isArray(racks)) {
-    return <p>Error: Invalid racks data.</p>;
+    return <p>Error: Invalid racks data.</p>; // Handle invalid data
   }
 
-  // Filter racks with exactly 2 packages
   const occupiedRacks = racks.filter(rack => rack.packages.length === 2);
   console.log('Occupied Racks:', occupiedRacks); // Debugging log
+
+  // Check if any occupied racks are found
+  if (occupiedRacks.length === 0) {
+    return <p>No occupied racks available.</p>;
+  }
 
   return (
     <div>

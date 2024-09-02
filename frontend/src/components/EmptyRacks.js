@@ -2,14 +2,17 @@ import React from 'react';
 import RackingSystem from './RackingSystem';
 
 const EmptyRacks = ({ racks, fetchRacks }) => {
-  // Ensure racks is not undefined or null
   if (!racks || !Array.isArray(racks)) {
-    return <p>Error: Invalid racks data.</p>;
+    return <p>Error: Invalid racks data.</p>; // Handle invalid data
   }
 
-  // Filter racks with fewer than 2 packages
   const emptyRacks = racks.filter(rack => rack.packages.length < 2);
   console.log('Empty Racks:', emptyRacks); // Debugging log
+
+  // Check if any empty racks are found
+  if (emptyRacks.length === 0) {
+    return <p>No empty racks available.</p>;
+  }
 
   return (
     <div>

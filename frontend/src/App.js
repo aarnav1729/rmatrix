@@ -18,6 +18,7 @@ function App() {
     try {
       const response = await axios.get('https://rmatrix.onrender.com/api/racks');
       setRacks(response.data); 
+      console.log('Fetched Racks:', response.data); // Add this line for debugging
     } catch (error) {
       console.error('Error fetching racks:', error);
     }

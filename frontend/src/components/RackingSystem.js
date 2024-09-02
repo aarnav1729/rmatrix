@@ -3,6 +3,9 @@ import RackColumn from './RackColumn';
 
 const RackingSystem = ({ racks, fetchRacks }) => {
   const columns = ['B1', 'B2', 'B3', 'B4'];
+  
+  // Debugging log to check the racks passed to RackingSystem
+  console.log('RackingSystem - Racks:', racks);
 
   return (
     <div className="racking-system grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
