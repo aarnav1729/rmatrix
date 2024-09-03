@@ -5,7 +5,7 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => { // Accept rackRefs 
 
   const scrollToRack = (rack) => {
     if (rackRefs[rack] && rackRefs[rack].current) {
-      rackRefs[rack].current.scrollIntoView({ behavior: 'smooth' });
+      rackRefs[rack].current.scrollIntoView({ behavior: 'smooth' }); // Ensure smooth scrolling
     }
   };
 
