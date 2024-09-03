@@ -84,12 +84,12 @@ const Header = ({ onSearch }) => {
                 <div
                   aria-hidden="true"
                   id="line"
-                  className={`m-auto h-0.5 w-5 rounded transition ease-in duration-300 ${scrolled ? 'bg-black' : 'bg-sky-900'} ${openNav ? 'rotate-45 translate-y-1.5 bg-black' : ''}`} // Ensure visibility of "X"
+                  className={`m-auto h-0.5 w-5 rounded transition ease-in duration-300 ${scrolled ? 'bg-black' : 'bg-blue-700'} ${openNav ? 'rotate-45 translate-y-1.5 bg-black' : ''}`} // Ensure visibility of "X"
                 ></div>
                 <div
                   aria-hidden="true"
                   id="line2"
-                  className={`m-auto mt-2 h-0.5 w-5 rounded transition ease-in duration-300 ${scrolled ? 'bg-black' : 'bg-sky-900'} ${openNav ? '-rotate-45 -translate-y-1 bg-black' : ''}`} // Ensure visibility of "X"
+                  className={`m-auto mt-2 h-0.5 w-5 rounded transition ease-in duration-300 ${scrolled ? 'bg-black' : 'bg-blue-700'} ${openNav ? '-rotate-45 -translate-y-1 bg-black' : ''}`} // Ensure visibility of "X"
                 ></div>
               </button>
             </div>
