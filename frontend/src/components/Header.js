@@ -43,9 +43,10 @@ const Header = ({ onSearch }) => {
     <header className={`sticky top-0 z-10 transition-all ease-in duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
       <nav className="w-full">
         <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
-          <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4">
+          {/* Main container to keep everything in one line */}
+          <div className="flex items-center justify-between py-3 md:py-4">
             {/* Left-aligned logo */}
-            <div className="relative z-20 flex items-center md:px-0 lg:w-max">
+            <div className="flex items-center">
               <Link to="/" aria-label="logo" className="flex items-center space-x-2">
                 <img
                   src={Logo}
@@ -73,11 +74,28 @@ const Header = ({ onSearch }) => {
             </div>
 
             {/* Right-aligned navigation links */}
-            <div className="relative z-20 flex max-h-10 items-center lg:hidden">
+            <div className="hidden lg:flex items-center space-x-6">
+              <ul className={`flex gap-6 tracking-wide lg:flex-row lg:gap-4 lg:text-sm ${scrolled ? 'text-black' : 'text-white'}`}>
+                {navLinks.map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      to={link.to}
+                      className={`hover:text-indigo-600 hover:bg-white p-2 rounded font-bold block transition ${scrolled ? 'text-black' : 'text-white'} hover:text-secondary`}
+                      onClick={() => setOpenNav(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Hamburger menu for mobile view */}
+            <div className="relative flex max-h-10 items-center lg:hidden">
               <button
                 aria-label="hamburger"
                 id="hamburger"
-                className="relative -mr-6 p-6"
+                className="relative p-6"
                 onClick={toggleNav}
               >
                 <div
@@ -92,30 +110,31 @@ const Header = ({ onSearch }) => {
                 ></div>
               </button>
             </div>
+          </div>
 
-            <div
-              id="navLayer"
-              aria-hidden="true"
-              className={`fixed inset-0 z-10 h-screen w-screen origin-bottom scale-y-0 bg-transparent backdrop-blur-2xl transition duration-500 lg:hidden ${openNav ? 'scale-y-100' : ''}`}
-            ></div>
-            <div
-              id="navlinks"
-              className={`absolute right-0 z-20 flex flex-col lg:flex-row items-center lg:relative gap-6 origin-top-right translate-y-1 scale-90 rounded-3xl border border-gray-100 bg-gray-700 p-8 opacity-0 shadow-2xl shadow-gray-600/10 transition-all ease-in duration-300 lg:visible lg:translate-y-0 lg:scale-100 lg:border-none lg:p-0 lg:opacity-100 lg:shadow-none ${scrolled ? 'lg:bg-transparent' : 'lg:bg-transparent'} ${openNav ? '!visible !scale-100 !opacity-100' : 'dark:bg-transparent'}`}
-            >
-              <ul className={`flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm ${scrolled ? 'text-black' : 'text-white'}`}>
-                {navLinks.map((link, index) => (
-                  <li key={index}>
-                    <Link
-                      to={link.to}
-                      className={`hover:text-indigo-600 hover:bg-white p-2 rounded font-bold block transition ${scrolled ? 'text-black' : 'text-white'} hover:text-secondary md:px-4`}
-                      onClick={() => setOpenNav(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* Mobile navigation menu */}
+          <div
+            id="navLayer"
+            aria-hidden="true"
+            className={`fixed inset-0 z-10 h-screen w-screen origin-bottom scale-y-0 bg-transparent backdrop-blur-2xl transition duration-500 lg:hidden ${openNav ? 'scale-y-100' : ''}`}
+          ></div>
+          <div
+            id="navlinks"
+            className={`absolute right-0 z-20 flex flex-col lg:hidden items-center gap-6 origin-top-right translate-y-1 scale-90 rounded-3xl border border-gray-100 bg-gray-700 p-8 opacity-0 shadow-2xl shadow-gray-600/10 transition-all ease-in duration-300 lg:visible lg:translate-y-0 lg:scale-100 lg:border-none lg:p-0 lg:opacity-100 lg:shadow-none ${scrolled ? 'lg:bg-transparent' : 'lg:bg-transparent'} ${openNav ? '!visible !scale-100 !opacity-100' : 'dark:bg-transparent'}`}
+          >
+            <ul className={`flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm ${scrolled ? 'text-black' : 'text-white'}`}>
+              {navLinks.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    to={link.to}
+                    className={`hover:text-indigo-600 hover:bg-white p-2 rounded font-bold block transition ${scrolled ? 'text-black' : 'text-white'} hover:text-secondary md:px-4`}
+                    onClick={() => setOpenNav(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </nav>
