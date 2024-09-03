@@ -63,7 +63,7 @@ const Header = ({ onSearch }) => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Enter QR Code"
-                className={`bg-gray-700 text-white p-2 rounded mr-2 transition ${scrolled ? 'border border-black' : ''} w-24 sm:w-36 md:w-48`} 
+                className={`bg-gray-700 text-white p-2 rounded mr-2 transition ${scrolled ? 'border border-black' : ''} w-24 sm:w-36 md:w-48`} // Adjusted width for better responsiveness
               />
               <button
                 onClick={handleSearch}
@@ -91,11 +91,11 @@ const Header = ({ onSearch }) => {
             </div>
 
             {/* Hamburger menu for mobile view */}
-            <div className="relative flex max-h-10 items-center lg:hidden">
+            <div className="relative flex max-h-10 items-center lg:hidden z-30"> {/* Adjusted z-index */}
               <button
                 aria-label="hamburger"
                 id="hamburger"
-                className="relative p-6"
+                className="relative p-6 z-30" // Ensure button is on top of the backdrop 
                 onClick={toggleNav}
               >
                 <div
@@ -116,7 +116,7 @@ const Header = ({ onSearch }) => {
           <div
             id="navLayer"
             aria-hidden="true"
-            className={`fixed inset-0 z-10 h-screen w-screen origin-bottom scale-y-0 bg-transparent backdrop-blur-2xl transition duration-500 lg:hidden ${openNav ? 'scale-y-100' : ''}`}
+            className={`fixed inset-0 z-20 h-screen w-screen origin-bottom scale-y-0 bg-transparent backdrop-blur-2xl transition duration-500 lg:hidden ${openNav ? 'scale-y-100' : ''}`} // Adjusted z-index to be lower than the button 
           ></div>
           <div
             id="navlinks"

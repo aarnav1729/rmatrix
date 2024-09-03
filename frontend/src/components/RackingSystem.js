@@ -5,7 +5,7 @@ const RackingSystem = ({ racks, fetchRacks, highlightedSpot }) => { // Receive h
   const columns = ['B1', 'B2', 'B3', 'B4'];
 
   return (
-    <div className="racking-system grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+    <div className="racking-system grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {columns.map(column => (
         <RackColumn
           key={column}
