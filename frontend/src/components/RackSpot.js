@@ -53,7 +53,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted }) =
                  w-[90%] h-[90%] min-h-[80px] min-w-[80px] mx-auto ${isHighlighted ? 'bg-yellow-500' : ''}`}
     >
       {/* Display coordinates of the spot */}
-      <h3 className="text-center text-white">{`Column: ${column}, Row: ${row}, Stack: ${stack}`}</h3>
+      <h3 className="text-center text-white">{`${column}, ${row}, ${stack}`}</h3>
       <div className="flex flex-col items-center w-full">
         {qrCodes.map((qrCode, index) => (
           <div key={index} className="flex justify-between items-center w-full mb-1">
