@@ -63,7 +63,7 @@ const Header = ({ onSearch }) => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Enter QR Code"
-                className={`bg-gray-700 text-white p-2 rounded mr-2 transition ${scrolled ? 'border border-black' : ''} w-24 sm:w-36 md:w-48`} // Adjusted width for better responsiveness
+                className={`bg-gray-700 text-white p-2 rounded mr-2 transition ${scrolled ? 'border border-black' : ''} w-24 sm:w-36 md:w-48`} 
               />
               <button
                 onClick={handleSearch}
@@ -73,29 +73,12 @@ const Header = ({ onSearch }) => {
               </button>
             </div>
 
-            {/* Right-aligned navigation links */}
-            <div className="hidden lg:flex items-center space-x-6">
-              <ul className={`flex gap-6 tracking-wide lg:flex-row lg:gap-4 lg:text-sm ${scrolled ? 'text-black' : 'text-white'}`}>
-                {navLinks.map((link, index) => (
-                  <li key={index}>
-                    <Link
-                      to={link.to}
-                      className={`hover:text-indigo-600 hover:bg-white p-2 rounded font-bold block transition ${scrolled ? 'text-black' : 'text-white'} hover:text-secondary`}
-                      onClick={() => setOpenNav(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Hamburger menu for mobile view */}
+            {/* Right-aligned hamburger menu for mobile view */}
             <div className="relative flex max-h-10 items-center lg:hidden z-30"> {/* Adjusted z-index */}
               <button
                 aria-label="hamburger"
                 id="hamburger"
-                className="relative p-6 z-30" // Ensure button is on top of the backdrop 
+                className="relative p-6 z-30" // Adjusted z-index
                 onClick={toggleNav}
               >
                 <div
@@ -112,15 +95,15 @@ const Header = ({ onSearch }) => {
             </div>
           </div>
 
-          {/* Mobile navigation menu */}
+          {/* Mobile navigation menu backdrop */}
           <div
             id="navLayer"
             aria-hidden="true"
-            className={`fixed inset-0 z-20 h-screen w-screen origin-bottom scale-y-0 bg-transparent backdrop-blur-2xl transition duration-500 lg:hidden ${openNav ? 'scale-y-100' : ''}`} // Adjusted z-index to be lower than the button 
+            className={`fixed inset-0 z-20 h-screen w-screen origin-bottom scale-y-0 bg-transparent backdrop-blur-2xl transition duration-500 lg:hidden ${openNav ? 'scale-y-100' : ''}`} 
           ></div>
           <div
             id="navlinks"
-            className={`absolute right-0 z-20 flex flex-col lg:hidden items-center gap-6 origin-top-right translate-y-1 scale-90 rounded-3xl border border-gray-100 bg-gray-700 p-8 opacity-0 shadow-2xl shadow-gray-600/10 transition-all ease-in duration-300 lg:visible lg:translate-y-0 lg:scale-100 lg:border-none lg:p-0 lg:opacity-100 lg:shadow-none ${scrolled ? 'lg:bg-transparent' : 'lg:bg-transparent'} ${openNav ? '!visible !scale-100 !opacity-100' : 'dark:bg-transparent'}`}
+            className={`absolute left-0 right-0 z-20 flex flex-col lg:hidden items-center gap-6 origin-top translate-y-1 scale-90 rounded-3xl border border-gray-100 bg-gray-700 p-8 opacity-0 shadow-2xl shadow-gray-600/10 transition-all ease-in duration-300 lg:visible lg:translate-y-0 lg:scale-100 lg:border-none lg:p-0 lg:opacity-100 lg:shadow-none ${scrolled ? 'lg:bg-transparent' : 'lg:bg-transparent'} ${openNav ? '!visible !scale-100 !opacity-100' : 'dark:bg-transparent'}`} /* Centered nav links when open */
           >
             <ul className={`flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm ${scrolled ? 'text-black' : 'text-white'}`}>
               {navLinks.map((link, index) => (
