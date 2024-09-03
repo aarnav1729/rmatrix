@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import RackColumn from './RackColumn';
 
 const RackingSystem = ({ racks, fetchRacks, highlightedSpot, rackRefs }) => { // Accept rackRefs as props
