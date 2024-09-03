@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import axios from 'axios';
 import Header from './components/Header';
@@ -43,6 +43,14 @@ function App() {
   const occupiedSpots = racks.reduce((acc, rack) => acc + rack.packages.length, 0);
   const openSpots = totalSpots - occupiedSpots;
 
+  // References for scrolling to racks
+  const rackRefs = {
+    B1: useRef(null),
+    B2: useRef(null),
+    B3: useRef(null),
+    B4: useRef(null),
+  };
+
   return (
     <div className="App flex flex-col min-h-screen bg-gray-900 text-white">
       <Header onSearch={handleSearch} />
@@ -50,7 +58,7 @@ function App() {
         <Routes>
           <Route path="/" element={
             <>
-              <Dashboard total={totalSpots} open={openSpots} occupied={occupiedSpots} />
+              <Dashboard total={totalSpots} open={openSpots} occupied={occupiedSpots} rackRefs={rackRefs} /> {/* Pass rackRefs */}
               <RackingSystem racks={racks} fetchRacks={fetchRacks} highlightedSpot={highlightedSpot} />
             </>
           } />

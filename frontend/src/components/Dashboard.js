@@ -1,7 +1,13 @@
 import React from 'react';
 
-const Dashboard = ({ total, open, occupied }) => {
+const Dashboard = ({ total, open, occupied, rackRefs }) => { // Accept rackRefs as props
   const percentageOccupied = ((occupied / total) * 100).toFixed(2);
+
+  const scrollToRack = (rack) => {
+    if (rackRefs[rack] && rackRefs[rack].current) {
+      rackRefs[rack].current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="bg-gray-800 p-4 rounded-lg mb-4">
@@ -24,6 +30,19 @@ const Dashboard = ({ total, open, occupied }) => {
             <div className="text-xl font-bold">{percentageOccupied}%</div>
           </div>
         </div>
+      </div>
+
+      {/* Add boxes for each rack */}
+      <div className="mt-6 grid grid-cols-2 gap-4">
+        {['B1', 'B2', 'B3', 'B4'].map((rack) => (
+          <div
+            key={rack}
+            className="bg-gray-700 text-white p-4 rounded-lg cursor-pointer text-center"
+            onClick={() => scrollToRack(rack)} // Scroll to rack on click
+          >
+            {rack}
+          </div>
+        ))}
       </div>
     </div>
   );
