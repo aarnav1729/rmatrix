@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import Logo from '../assets/2bg.png'; // Update this with your actual logo path
+import Logo from '../assets/logo.png'; // Update this with your actual logo path
 
 const Header = ({ onSearch }) => {
   const [openNav, setOpenNav] = useState(false);
