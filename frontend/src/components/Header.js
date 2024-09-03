@@ -63,7 +63,7 @@ const Header = ({ onSearch }) => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Enter QR Code"
-                className={`bg-gray-700 text-white p-2 rounded mr-2 transition ${scrolled ? 'border border-black' : ''} w-24 sm:w-36 md:w-48`} {/* Responsive width */}
+                className={`bg-gray-700 text-white p-2 rounded mr-2 transition ${scrolled ? 'border border-black' : ''} w-24 sm:w-36 md:w-48`} 
               />
               <button
                 onClick={handleSearch}
