@@ -1,21 +1,24 @@
 import React from 'react';
 import RackRow from './RackRow';
 
-const RackColumn = ({ column, racks, fetchRacks }) => {
+const RackColumn = ({ column, racks, fetchRacks, highlightedSpot }) => { // Receive highlightedSpot as prop
   const rows = Array.from({ length: 33 }, (_, index) => index + 1);
 
   return (
-    <div className="rack-column border p-2">
-      <h2 className="text-center font-bold">{column}</h2>
-      {rows.map(row => (
-        <RackRow
-          key={row}
-          row={row}
-          stacks={racks.filter(rack => rack.row === row)}
-          column={column}
-          fetchRacks={fetchRacks}
-        />
-      ))}
+    <div className="rack-column border flex flex-col items-center bg-gray-900">
+      <h2 className="text-center font-bold mb-4 text-white">{column}</h2> 
+      <div className="grid grid-cols-1 w-full">
+        {rows.map(row => (
+          <RackRow
+            key={row}
+            row={row}
+            stacks={racks.filter(rack => rack.row === row)}
+            column={column}
+            fetchRacks={fetchRacks}
+            highlightedSpot={highlightedSpot} // Pass down to RackRow
+          />
+        ))}
+      </div>
     </div>
   );
 };

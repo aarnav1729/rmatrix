@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const RackSpot = ({ stack, packages, column, row, fetchRacks }) => {
+const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted }) => {
   const [qrCodes, setQrCodes] = useState(packages);
+  const spotRef = useRef(null);
 
   useEffect(() => {
     setQrCodes(packages);
   }, [packages]);
+
+  useEffect(() => {
+    if (isHighlighted && spotRef.current) {
+      spotRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [isHighlighted]);
 
   const handleAdd = async () => {
     if (qrCodes.length >= 2) {
@@ -20,7 +27,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks }) => {
         column,
         row,
         stack,
-        qrCode
+        qrCode,
       });
       fetchRacks();
     }
@@ -33,22 +40,35 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks }) => {
         column,
         row,
         stack,
-        qrCode
-      }
+        qrCode,
+      },
     });
     fetchRacks();
   };
 
   return (
-    <div className="rack-spot p-2 border">
-      <h3>Stack {stack}</h3>
-      {qrCodes.map((qrCode, index) => (
-        <div key={index} className="flex justify-between items-center">
-          <span>{qrCode}</span>
-          <button className="text-red-500" onClick={() => handleDelete(index)}>Delete</button>
-        </div>
-      ))}
-      <button className="text-blue-500" onClick={handleAdd}>Add QR Code</button>
+    <div
+      ref={spotRef}
+      className={`rack-spot border flex flex-col justify-between items-center bg-gray-600 rounded-lg shadow-md 
+                 w-[90%] h-[90%] min-h-[80px] min-w-[80px] mx-auto ${isHighlighted ? 'bg-yellow-500' : ''}`}
+    >
+      <h3 className="text-center text-white">Stack {stack}</h3>
+      <div className="flex flex-col items-center w-full">
+        {qrCodes.map((qrCode, index) => (
+          <div key={index} className="flex justify-between items-center w-full mb-1">
+            <span className="text-white">{qrCode}</span>
+            {/* Reduced margin between QR Code and Delete button */}
+            <button className="text-red-500 ml-2" onClick={() => handleDelete(index)}>
+              Del
+            </button>
+          </div>
+        ))}
+      </div>
+      {qrCodes.length < 2 && (
+        <button className="text-blue-500 mt-auto" onClick={handleAdd}>
+          Add
+        </button>
+      )}
     </div>
   );
 };

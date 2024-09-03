@@ -1,63 +1,124 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import Logo from '../assets/2bg.png'; // Update this with your actual logo path
 
 const Header = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openNav, setOpenNav] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(''); // State for search input
+
+  const navLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/info', label: 'Info' }
+  ];
+
+  const toggleNav = () => setOpenNav(!openNav);
 
   const handleSearch = () => {
-    onSearch(searchTerm);
+    if (searchTerm.trim()) {
+      onSearch(searchTerm);
+      setSearchTerm(''); // Clear search input after searching
+    }
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <header className="bg-gray-800 p-4 flex flex-col md:flex-row md:justify-between items-center">
-      <div className="flex justify-between w-full md:w-auto items-center">
-        <button className="text-white block md:hidden" onClick={toggleMenu}>
-          <i className="fas fa-bars"></i>
-        </button>
-        <Link to="/" className="text-2xl font-bold hidden md:block ml-2">
-          RM Racking
-        </Link>
-      </div>
+    <header className={`sticky top-0 z-10 transition-all ease-in duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+      <nav className="w-full">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-6">
+          <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4">
+            {/* Left-aligned logo */}
+            <div className="relative z-20 flex items-center md:px-0 lg:w-max">
+              <Link to="/" aria-label="logo" className="flex items-center space-x-2">
+                <img
+                  src={Logo}
+                  alt="Logo"
+                  className={`transition-all duration-300 ${scrolled ? 'h-12' : 'h-10'} md:h-12`}
+                />
+              </Link>
+            </div>
 
-      <nav
-        className={`flex-col md:flex-row md:flex items-center space-x-4 ${
-          isMenuOpen ? 'flex' : 'hidden md:flex'
-        }`}
-      >
-        <Link to="/" className="text-white hover:underline md:mt-0 mt-2">
-          Home
-        </Link>
-        <Link to="/empty-racks" className="text-white hover:underline md:mt-0 mt-2">
-          Empty Racks
-        </Link>
-        <Link to="/occupied-racks" className="text-white hover:underline md:mt-0 mt-2">
-          Occupied Racks
-        </Link>
-        <Link to="/info" className="text-white hover:underline md:mt-0 mt-2">
-          Info
-        </Link>
+            {/* Center-aligned search bar */}
+            <div className="flex items-center justify-center mx-auto">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Enter QR Code"
+                className={`bg-gray-700 text-white p-2 rounded mr-2 transition ${scrolled ? 'border border-black' : ''}`}
+              />
+              <button
+                onClick={handleSearch}
+                className={`hover:bg-blue-700 font-bold relative flex h-9 items-center justify-center px-3 py-2 rounded-xl before:absolute before:inset-0 before:rounded-xl before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max ${scrolled ? 'bg-blue-600 text-white' : 'bg-blue-600 text-white'}`}
+              >
+                <FontAwesomeIcon icon={faSearch} /> {/* Search Icon */}
+              </button>
+            </div>
+
+            {/* Right-aligned navigation links */}
+            <div className="relative z-20 flex max-h-10 items-center lg:hidden">
+              <button
+                aria-label="hamburger"
+                id="hamburger"
+                className="relative -mr-6 p-6"
+                onClick={toggleNav}
+              >
+                <div
+                  aria-hidden="true"
+                  id="line"
+                  className={`m-auto h-0.5 w-5 rounded transition ease-in duration-300 ${scrolled ? 'bg-black' : 'bg-sky-900'} ${openNav ? 'rotate-45 translate-y-1.5' : ''}`}
+                ></div>
+                <div
+                  aria-hidden="true"
+                  id="line2"
+                  className={`m-auto mt-2 h-0.5 w-5 rounded transition ease-in duration-300 ${scrolled ? 'bg-black' : 'bg-sky-900'} ${openNav ? '-rotate-45 -translate-y-1' : ''}`}
+                ></div>
+              </button>
+            </div>
+
+            <div
+              id="navLayer"
+              aria-hidden="true"
+              className={`fixed inset-0 z-10 h-screen w-screen origin-bottom scale-y-0 bg-transparent backdrop-blur-2xl transition duration-500 lg:hidden ${openNav ? 'scale-y-100' : ''}`}
+            ></div>
+            <div
+              id="navlinks"
+              className={`absolute right-0 z-20 flex flex-col lg:flex-row items-center lg:relative gap-6 origin-top-right translate-y-1 scale-90 rounded-3xl border border-gray-100 bg-gray-700 p-8 opacity-0 shadow-2xl shadow-gray-600/10 transition-all ease-in duration-300 lg:visible lg:translate-y-0 lg:scale-100 lg:border-none lg:p-0 lg:opacity-100 lg:shadow-none ${scrolled ? 'lg:bg-transparent' : 'lg:bg-transparent'} ${openNav ? '!visible !scale-100 !opacity-100' : 'dark:bg-transparent'}`}
+            >
+              <ul className={`flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm ${scrolled ? 'text-black' : 'text-white'}`}>
+                {navLinks.map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      to={link.to}
+                      className={`hover:text-indigo-600 hover:bg-white p-2 rounded font-bold block transition ${scrolled ? 'text-black' : 'text-white'} hover:text-secondary md:px-4`}
+                      onClick={() => setOpenNav(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
       </nav>
-
-      <div className="flex mt-4 md:mt-0">
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search"
-          className="bg-gray-700 p-2 rounded mr-2"
-        />
-        <button
-          onClick={handleSearch}
-          className="bg-blue-500 text-white p-2 rounded"
-        >
-          Search
-        </button>
-      </div>
     </header>
   );
 };

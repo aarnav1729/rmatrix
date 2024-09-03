@@ -1,11 +1,11 @@
 import React from 'react';
 import RackSpot from './RackSpot';
 
-const RackRow = ({ row, stacks, column, fetchRacks }) => {
+const RackRow = ({ row, stacks, column, fetchRacks, highlightedSpot }) => { // Receive highlightedSpot as prop
   const stackPositions = Array.from({ length: 5 }, (_, index) => index + 1);
 
   return (
-    <div className="rack-row flex">
+    <div className="rack-row grid grid-cols-5 w-full">
       {stackPositions.map(stack => {
         const spot = stacks.find(s => s.stack === stack) || { packages: [] };
         return (
@@ -16,6 +16,7 @@ const RackRow = ({ row, stacks, column, fetchRacks }) => {
             column={column}
             row={row}
             fetchRacks={fetchRacks}
+            isHighlighted={highlightedSpot && highlightedSpot.column === column && highlightedSpot.row === row && highlightedSpot.stack === stack} // Determine if the spot is highlighted
           />
         );
       })}
