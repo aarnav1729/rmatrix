@@ -34,6 +34,7 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => { // Accept rackRefs 
 
       {/* Add boxes for each rack */}
       <div className="mt-6 grid grid-cols-2 gap-4">
+        <h2 className="text-xl font-bold mb-4">Navigate to Rack:</h2>
         {['B1', 'B2', 'B3', 'B4'].map((rack) => (
           <div
             key={rack}
