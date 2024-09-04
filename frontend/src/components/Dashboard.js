@@ -7,7 +7,7 @@ am4core.useTheme(am4themes_animated);
 
 const Dashboard = ({ total, open, occupied, rackRefs }) => {
   const percentageOccupied = ((occupied / total) * 100).toFixed(2);
-  console.log('percentageOccupied:', percentageOccupied);
+  console.log('percentage occupied', percentageOccupied);
   const percentageOpen = ((open / total) * 100).toFixed(2);
 
   const scrollToRack = (rack) => {
@@ -62,7 +62,7 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
   return (
     <div className="bg-gray-800 p-4 rounded-lg mb-4">
       <h2 className="text-xl font-bold mb-4 text-white">Project Tasks</h2>
-      <div className="grid grid-cols-2 md:flex md:justify-around items-center gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 md:flex md:justify-around items-center gap-4">
         <div className="flex flex-col items-center">
           <div className="text-3xl font-bold text-white">{occupied}</div>
           <div className="text-white">Occupied</div>
@@ -79,7 +79,7 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
           <div className="text-3xl font-bold text-white">{percentageOpen}</div>
           <div className="text-white">% Open</div>
         </div>
-
+      </div>
 
       {/* Pie Chart Section on a New Line */}
       <div className="flex justify-center mt-8">
@@ -99,7 +99,6 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
             {rack}
           </div>
         ))}
-      </div>
       </div>
     </div>
   );
