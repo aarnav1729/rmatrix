@@ -85,7 +85,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, set
         ))}
       </div>
       {qrCodes.length < 2 && (
-        <button className="text-blue-500 mt-auto" onClick={handleAdd}>
+        <button className="text-blue-500 mt-auto mb-1" onClick={handleAdd}>
           Add
         </button>
       )}
