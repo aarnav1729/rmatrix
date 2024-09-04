@@ -38,9 +38,9 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted }) =
           // Show the alert message first
           alert(`QR already exists at ${location.column}-${location.row}-${location.stack}`);
 
-          // Replicate the search functionality here to highlight the duplicate spot
-          if (location) {
-            searchAndHighlight(location);
+          // Call the function to highlight the spot by searching for the QR code
+          if (qrCode) {
+            searchAndHighlight(qrCode);  // Pass the QR code instead of location
           }
         } else {
           console.error('Error adding QR code:', error);
@@ -50,9 +50,9 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted }) =
   };
 
   // Internal function to search and highlight the duplicate QR code
-  const searchAndHighlight = async (location) => {
+  const searchAndHighlight = async (qrCode) => {
     try {
-      const response = await axios.get(`https://rmatrix.onrender.com/api/racks/search?qrCode=${location.qrCode}`);
+      const response = await axios.get(`https://rmatrix.onrender.com/api/racks/search?qrCode=${qrCode}`);
       if (response.data.location) {
         // Extract the column, row, and stack from the location data
         const [foundColumn, foundRow, foundStack] = response.data.location.split('-');
