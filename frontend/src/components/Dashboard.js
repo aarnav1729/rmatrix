@@ -37,6 +37,14 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
       return `${target.dataItem.category}: {value} spots ({value.percent.formatNumber('#.0')}%)`;
     });
 
+    // Set label colors to white and adjust position for smaller screens
+    series.labels.template.fill = am4core.color("#FFFFFF"); // Set text color to white
+    series.labels.template.adapter.add("radius", function (radius, target) {
+      return window.innerWidth < 768 ? -30 : -60; // Adjust position for mobile screens
+    });
+    series.labels.template.wrap = true; // Enable text wrapping
+    series.labels.template.maxWidth = window.innerWidth < 768 ? 100 : 200; // Adjust width for mobile
+
     // Cleanup on component unmount
     return () => {
       chart.dispose();
@@ -45,23 +53,23 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
 
   return (
     <div className="bg-gray-800 p-4 rounded-lg mb-4">
-      <h2 className="text-xl font-bold mb-4">Project Tasks</h2>
+      <h2 className="text-xl font-bold mb-4 text-white">Project Tasks</h2>
       <div className="grid grid-cols-2 md:flex md:justify-around items-center gap-4">
         <div className="flex flex-col items-center">
-          <div className="text-3xl font-bold">{occupied}</div>
-          <div>Occupied</div>
+          <div className="text-3xl font-bold text-white">{occupied}</div>
+          <div className="text-white">Occupied</div>
         </div>
         <div className="flex flex-col items-center">
-          <div className="text-3xl font-bold">{open}</div>
-          <div>Open</div>
+          <div className="text-3xl font-bold text-white">{open}</div>
+          <div className="text-white">Open</div>
         </div>
         <div className="flex flex-col items-center">
-          <div className="text-3xl font-bold">{total}</div>
-          <div>Total Spots</div>
+          <div className="text-3xl font-bold text-white">{total}</div>
+          <div className="text-white">Total Spots</div>
         </div>
         {/* Replace the hollow circle with the amCharts Pie Chart */}
         <div className="flex flex-col items-center">
-          <div id="chartdiv" className="w-64 h-64"></div> {/* Updated chart container */}
+          <div id="chartdiv" className="w-64 h-64 sm:w-full sm:h-64"></div> {/* Updated chart container */}
         </div>
       </div>
 
