@@ -5,9 +5,6 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
   const [qrCodes, setQrCodes] = useState(packages);
   const spotRef = useRef(null);
 
-  // State to keep track of all spots with exactly 2 QR Codes
-  const [fullSpots, setFullSpots] = useState([]);
-
   useEffect(() => {
     setQrCodes(packages);
   }, [packages]);
