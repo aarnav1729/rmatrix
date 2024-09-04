@@ -73,11 +73,13 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
         </div>
         <div className="flex flex-col items-center">
           <div className="text-3xl font-bold text-white">{total}</div>
-          <div className="text-white">
-            Total Spots (<span className="text-lg font-semibold">{percentageOpen}% open</span>)
-          </div>
+          <div className="text-white">Total Spots</div>
         </div>
-      </div>
+        <div className="flex flex-col items-center">
+          <div className="text-3xl font-bold text-white">{percentageOpen}</div>
+          <div className="text-white">% Open</div>
+        </div>
+
 
       {/* Pie Chart Section on a New Line */}
       <div className="flex justify-center mt-8">
@@ -97,6 +99,7 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
             {rack}
           </div>
         ))}
+      </div>
       </div>
     </div>
   );
