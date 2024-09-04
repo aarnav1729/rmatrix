@@ -11,6 +11,7 @@ import BackToTop from './components/BackToTop';
 function App() {
   const [racks, setRacks] = useState([]);
   const [highlightedSpot, setHighlightedSpot] = useState(null); // New state for highlighted spot
+  const [fullSpots, setFullSpots] = useState([]); // State to store spots with exactly 2 QR Codes
 
   useEffect(() => {
     fetchRacks();
@@ -22,10 +23,29 @@ function App() {
       const response = await axios.get('https://rmatrix.onrender.com/api/racks');
       setRacks(response.data);
       console.log('Fetched Racks:', response.data); // Debugging log
+
+      // Calculate full spots after fetching racks
+      const spotsWithTwoQRCodes = [];
+      response.data.forEach(rack => {
+        if (rack.packages.length === 2) {
+          spotsWithTwoQRCodes.push({
+            column: rack.column,
+            row: rack.row,
+            stack: rack.stack
+          });
+        }
+      });
+      setFullSpots(spotsWithTwoQRCodes); // Update state with full spots
     } catch (error) {
       console.error('Error fetching racks:', error);
     }
   };
+
+  useEffect(() => {
+    if (fullSpots.length > 0) {
+      console.log('Rack Spots with exactly 2 QR Codes:', fullSpots);
+    }
+  }, [fullSpots]); // Log full spots only once after they are calculated
 
   const handleSearch = (qrCode) => {
     axios.get(`https://rmatrix.onrender.com/api/racks/search?qrCode=${qrCode}`)
@@ -60,7 +80,7 @@ function App() {
           <Route path="/" element={
             <>
               <Dashboard total={totalSpots} open={openSpots} occupied={occupiedSpots} rackRefs={rackRefs} />
-              <RackingSystem racks={racks} fetchRacks={fetchRacks} highlightedSpot={highlightedSpot} rackRefs={rackRefs} setHighlightedSpot={setHighlightedSpot} handleSearch={handleSearch} /> {/* Pass handleSearch */}
+              <RackingSystem racks={racks} fetchRacks={fetchRacks} highlightedSpot={highlightedSpot} rackRefs={rackRefs} setHighlightedSpot={setHighlightedSpot} />
             </>
           } />
           <Route path="/info" element={<Info />} />
