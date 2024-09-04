@@ -60,7 +60,7 @@ function App() {
           <Route path="/" element={
             <>
               <Dashboard total={totalSpots} open={openSpots} occupied={occupiedSpots} rackRefs={rackRefs} />
-              <RackingSystem racks={racks} fetchRacks={fetchRacks} highlightedSpot={highlightedSpot} rackRefs={rackRefs} setHighlightedSpot={setHighlightedSpot} /> {/* Pass setHighlightedSpot */}
+              <RackingSystem racks={racks} fetchRacks={fetchRacks} highlightedSpot={highlightedSpot} rackRefs={rackRefs} setHighlightedSpot={setHighlightedSpot} handleSearch={handleSearch} /> {/* Pass handleSearch */}
             </>
           } />
           <Route path="/info" element={<Info />} />
