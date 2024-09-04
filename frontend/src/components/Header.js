@@ -103,14 +103,14 @@ const Header = ({ onSearch }) => {
           ></div>
           <div
             id="navlinks"
-            className={`absolute left-0 right-0 z-20 flex flex-col lg:hidden items-center gap-6 origin-top translate-y-1 scale-90 rounded-3xl border border-gray-100 bg-gray-700 p-8 opacity-0 shadow-2xl shadow-gray-600/10 transition-all ease-in duration-300 lg:visible lg:translate-y-0 lg:scale-100 lg:border-none lg:p-0 lg:opacity-100 lg:shadow-none ${scrolled ? 'lg:bg-transparent' : 'lg:bg-transparent'} ${openNav ? '!visible !scale-100 !opacity-100' : 'dark:bg-transparent'}`} /* Centered nav links when open */
+            className={`absolute left-0 right-0 z-20 flex flex-col lg:hidden items-center gap-6 origin-top translate-y-1 scale-90 rounded-3xl border border-gray-100 bg-gray-700 p-8 opacity-0 shadow-2xl shadow-gray-600/10 transition-all ease-in duration-300 lg:visible lg:translate-y-0 lg:scale-100 lg:border-none lg:p-0 lg:opacity-100 lg:shadow-none ${scrolled ? 'lg:bg-transparent' : 'lg:bg-transparent'} ${openNav ? '!visible !scale-100 !opacity-100' : 'dark:bg-transparent'}`} 
           >
-            <ul className={`flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm ${scrolled ? 'text-black' : 'text-white'}`}>
+            <ul className={`flex flex-col gap-6 tracking-wide lg:flex-row lg:gap-0 lg:text-sm ${scrolled ? 'text-white' : 'text-white'}`}>
               {navLinks.map((link, index) => (
                 <li key={index}>
                   <Link
                     to={link.to}
-                    className={`hover:text-indigo-600 hover:bg-white p-2 rounded font-bold block transition ${scrolled ? 'text-black' : 'text-white'} hover:text-secondary md:px-4`}
+                    className={`hover:text-indigo-600 hover:bg-white p-2 rounded font-bold block transition ${scrolled ? 'text-white' : 'text-white'} hover:text-secondary md:px-4`}
                     onClick={() => setOpenNav(false)}
                   >
                     {link.label}
