@@ -7,7 +7,7 @@ am4core.useTheme(am4themes_animated);
 
 const Dashboard = ({ total, open, occupied, rackRefs }) => {
   const percentageOccupied = ((occupied / total) * 100).toFixed(2);
-  console.log('Percentage Occupied:', percentageOccupied);
+  const percentageOpen = ((open / total) * 100).toFixed(2);
 
   const scrollToRack = (rack) => {
     if (rackRefs[rack] && rackRefs[rack].current) {
@@ -21,8 +21,9 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
     chart.hiddenState.properties.opacity = 0; // Creates initial fade-in effect
     chart.legend = new am4charts.Legend(); // Adds legend
 
-    // Set legend text color to white
+    // Set legend text and percentage color to white
     chart.legend.labels.template.fill = am4core.color("#FFFFFF");
+    chart.legend.valueLabels.template.fill = am4core.color("#FFFFFF");
 
     // Set data for the chart
     chart.data = [
@@ -71,11 +72,16 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
         </div>
         <div className="flex flex-col items-center">
           <div className="text-3xl font-bold text-white">{total}</div>
-          <div className="text-white">Total Spots</div>
+          <div className="text-white">
+            Total Spots (<span className="text-lg font-semibold">{percentageOpen}% open</span>)
+          </div>
         </div>
-        {/* Replace the hollow circle with the amCharts Pie Chart */}
-        <div className="flex flex-col items-center">
-          <div id="chartdiv" className="w-48 h-48 sm:w-full sm:h-64"></div> {/* Adjusted chart container size */}
+      </div>
+
+      {/* Pie Chart Section on a New Line */}
+      <div className="flex justify-center mt-8">
+        <div className="w-full max-w-xs sm:max-w-md">
+          <div id="chartdiv" className="w-full h-64"></div> {/* Updated chart container */}
         </div>
       </div>
 
