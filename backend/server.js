@@ -3,7 +3,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: 'https://permatrix.netlify.app', 
+  methods: ['GET', 'POST', 'DELETE'], 
+  credentials: true 
+}));
+
 app.use(express.json());
 
 const mongoURI = 'mongodb+srv://aarnavsingh836:Cucumber1729@rr.oldse8x.mongodb.net/rackingSystem?retryWrites=true&w=majority&appName=rr';
