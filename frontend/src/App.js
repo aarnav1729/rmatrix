@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import RackingSystem from './components/RackingSystem';
 import Info from './components/Info';
-import BackToTop from './components/BackToTop'; // Import BackToTop component
+import BackToTop from './components/BackToTop';
 
 function App() {
   const [racks, setRacks] = useState([]);
@@ -40,6 +40,10 @@ function App() {
       });
   };
 
+  const highlightSpot = (column, row, stack) => {
+    setHighlightedSpot({ column, row: Number(row), stack: Number(stack) }); // Highlight the specified spot
+  };
+
   const totalSpots = 1320;
   const occupiedSpots = racks.reduce((acc, rack) => acc + rack.packages.length, 0);
   const openSpots = totalSpots - occupiedSpots;
@@ -60,12 +64,12 @@ function App() {
           <Route path="/" element={
             <>
               <Dashboard total={totalSpots} open={openSpots} occupied={occupiedSpots} rackRefs={rackRefs} /> {/* Pass rackRefs */}
-              <RackingSystem racks={racks} fetchRacks={fetchRacks} highlightedSpot={highlightedSpot} rackRefs={rackRefs} /> {/* Pass rackRefs */}
+              <RackingSystem racks={racks} fetchRacks={fetchRacks} highlightedSpot={highlightedSpot} rackRefs={rackRefs} highlightSpot={highlightSpot} /> {/* Pass highlightSpot */}
             </>
           } />
           <Route path="/info" element={<Info />} />
         </Routes>
-        <BackToTop /> {/* Add the BackToTop component */}
+        <BackToTop />
       </main>
       <Footer />
     </div>
