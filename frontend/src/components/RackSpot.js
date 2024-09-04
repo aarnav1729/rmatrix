@@ -36,6 +36,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
           const { message, location } = error.response.data;
           // Updated message to include the actual location
           alert(`QR already exists at ${location.column}-${location.row}-${location.stack}`);
+          console.log(message);
           if (location) {
             handleSearch(qrCode); // Use handleSearch to trigger the search functionality
           }
