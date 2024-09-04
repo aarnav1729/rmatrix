@@ -71,7 +71,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
           <div key={index} className="flex justify-between items-center w-full mb-1">
             <span className="text-white">{qrCode}</span>
             {/* Reduced margin between QR Code and Delete button */}
-            <button className="text-red-500 ml-2" onClick={() => handleDelete(index)}>
+            <button className="text-red-500 ml-1" onClick={() => handleDelete(index)}>
               Del
             </button>
           </div>
