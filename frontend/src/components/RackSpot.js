@@ -63,7 +63,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
     <div
       ref={spotRef}
       className={`rack-spot border flex flex-col justify-between items-center bg-gray-600 rounded-lg shadow-md 
-                 w-[90%] h-[90%] min-h-[80px] min-w-[80px] mx-auto ${isHighlighted ? 'bg-yellow-500' : ''}`}
+                 w-[90%] h-[90%] min-h-[70px] min-w-[70px] mx-auto ${isHighlighted ? 'bg-yellow-500' : ''}`}
     >
       <h3 className="text-center text-white">{`${column},${row},${stack}`}</h3>
       <div className="flex flex-col items-center w-full">
