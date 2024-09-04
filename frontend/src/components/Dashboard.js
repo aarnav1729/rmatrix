@@ -1,12 +1,12 @@
-import React from 'react';
-import { Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import React, { useEffect } from 'react';
+import * as am4core from "@amcharts/amcharts4/core";
+import * as am4charts from "@amcharts/amcharts4/charts";
+import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+am4core.useTheme(am4themes_animated);
 
-const Dashboard = ({ total, open, occupied, rackRefs }) => { // Accept rackRefs as props
+const Dashboard = ({ total, open, occupied, rackRefs }) => {
   const percentageOccupied = ((occupied / total) * 100).toFixed(2);
-  console.log('Percentage Occupied:', percentageOccupied);
 
   const scrollToRack = (rack) => {
     if (rackRefs[rack] && rackRefs[rack].current) {
@@ -14,17 +14,33 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => { // Accept rackRefs 
     }
   };
 
-  // Data for the Pie chart
-  const data = {
-    labels: ['Occupied', 'Open'],
-    datasets: [
-      {
-        data: [occupied, open],
-        backgroundColor: ['#1E90FF', '#32CD32'], // Colors for Occupied and Open
-        hoverBackgroundColor: ['#1C86EE', '#2E8B57'], // Hover colors
-      },
-    ],
-  };
+  useEffect(() => {
+    // Create chart instance
+    let chart = am4core.create("chartdiv", am4charts.PieChart3D);
+    chart.hiddenState.properties.opacity = 0; // Creates initial fade-in effect
+    chart.legend = new am4charts.Legend(); // Adds legend
+
+    // Set data for the chart
+    chart.data = [
+      { category: "Occupied", value: occupied, color: am4core.color("#1E90FF") },
+      { category: "Open", value: open, color: am4core.color("#32CD32") }
+    ];
+
+    // Configure Pie Series
+    let series = chart.series.push(new am4charts.PieSeries3D());
+    series.dataFields.value = "value";
+    series.dataFields.category = "category";
+    series.slices.template.propertyFields.fill = "color";
+
+    series.slices.template.adapter.add("tooltipText", function (text, target) {
+      return `${target.dataItem.category}: {value} spots ({value.percent.formatNumber('#.0')}%)`;
+    });
+
+    // Cleanup on component unmount
+    return () => {
+      chart.dispose();
+    };
+  }, [open, occupied]); // Re-render the chart when data changes
 
   return (
     <div className="bg-gray-800 p-4 rounded-lg mb-4">
@@ -42,14 +58,11 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => { // Accept rackRefs 
           <div className="text-3xl font-bold">{total}</div>
           <div>Total Spots</div>
         </div>
+        {/* Replace the hollow circle with the amCharts Pie Chart */}
         <div className="flex flex-col items-center">
-          {/* Pie Chart */}
-          <div className="w-24 h-24">
-            <Pie data={data} />
-          </div>
+          <div id="chartdiv" className="w-64 h-64"></div> {/* Updated chart container */}
         </div>
       </div>
-
 
       {/* Add boxes for each rack */}
       <div className="mt-6 grid grid-cols-2 gap-4">
@@ -57,7 +70,7 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => { // Accept rackRefs 
           <div
             key={rack}
             className="bg-gray-700 text-white p-4 rounded-lg cursor-pointer text-center"
-            onClick={() => scrollToRack(rack)} 
+            onClick={() => scrollToRack(rack)}
           >
             {rack}
           </div>
