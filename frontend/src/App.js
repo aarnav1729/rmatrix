@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import RackingSystem from './components/RackingSystem';
 import Info from './components/Info';
+import BackToTop from './components/BackToTop'; // Import BackToTop component
 
 function App() {
   const [racks, setRacks] = useState([]);
@@ -64,6 +65,7 @@ function App() {
           } />
           <Route path="/info" element={<Info />} />
         </Routes>
+        <BackToTop /> {/* Add the BackToTop component */}
       </main>
       <Footer />
     </div>
