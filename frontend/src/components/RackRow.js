@@ -5,7 +5,7 @@ const RackRow = ({ row, stacks, column, fetchRacks, highlightedSpot, handleSearc
   const stackPositions = Array.from({ length: 5 }, (_, index) => index + 1);
 
   return (
-    <div className="rack-row grid grid-cols-5 w-full">
+    <div className="rack-row grid grid-cols-5 w-full mr-2 ml-2">
       {stackPositions.map(stack => {
         const spot = stacks.find(s => s.stack === stack) || { packages: [] };
         return (
