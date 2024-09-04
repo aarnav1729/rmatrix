@@ -28,6 +28,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
         if (!prevFullSpots.some(s => s.column === column && s.row === row && s.stack === stack)) {
           const updatedSpots = [...prevFullSpots, spot];
           console.log('Rack Spots with exactly 2 QR Codes:', updatedSpots);
+          console.log('ignore this', fullSpots);
           return updatedSpots;
         }
         return prevFullSpots;
