@@ -7,6 +7,7 @@ am4core.useTheme(am4themes_animated);
 
 const Dashboard = ({ total, open, occupied, rackRefs }) => {
   const percentageOccupied = ((occupied / total) * 100).toFixed(2);
+  console.log('Percentage Occupied:', percentageOccupied);
 
   const scrollToRack = (rack) => {
     if (rackRefs[rack] && rackRefs[rack].current) {
