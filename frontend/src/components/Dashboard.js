@@ -21,6 +21,9 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
     chart.hiddenState.properties.opacity = 0; // Creates initial fade-in effect
     chart.legend = new am4charts.Legend(); // Adds legend
 
+    // Set legend text color to white
+    chart.legend.labels.template.fill = am4core.color("#FFFFFF");
+
     // Set data for the chart
     chart.data = [
       { category: "Occupied", value: occupied, color: am4core.color("#1E90FF") },
@@ -40,10 +43,13 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
     // Set label colors to white and adjust position for smaller screens
     series.labels.template.fill = am4core.color("#FFFFFF"); // Set text color to white
     series.labels.template.adapter.add("radius", function (radius, target) {
-      return window.innerWidth < 768 ? -30 : -60; // Adjust position for mobile screens
+      return window.innerWidth < 768 ? -10 : -60; // Reduce position for mobile screens
+    });
+    series.labels.template.adapter.add("fontSize", function (size, target) {
+      return window.innerWidth < 768 ? 12 : 14; // Adjust font size for mobile
     });
     series.labels.template.wrap = true; // Enable text wrapping
-    series.labels.template.maxWidth = window.innerWidth < 768 ? 100 : 200; // Adjust width for mobile
+    series.labels.template.maxWidth = window.innerWidth < 768 ? 80 : 200; // Reduce width for mobile
 
     // Cleanup on component unmount
     return () => {
@@ -69,7 +75,7 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
         </div>
         {/* Replace the hollow circle with the amCharts Pie Chart */}
         <div className="flex flex-col items-center">
-          <div id="chartdiv" className="w-64 h-64 sm:w-full sm:h-64"></div> {/* Updated chart container */}
+          <div id="chartdiv" className="w-48 h-48 sm:w-full sm:h-64"></div> {/* Adjusted chart container size */}
         </div>
       </div>
 
