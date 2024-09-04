@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, handleSearch }) => { // Use handleSearch prop
+const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, handleSearch }) => {
   const [qrCodes, setQrCodes] = useState(packages);
   const spotRef = useRef(null);
+
+  // Array to keep track of all spots with exactly 2 QR Codes
+  const [fullSpots, setFullSpots] = useState([]);
 
   useEffect(() => {
     setQrCodes(packages);
@@ -18,6 +21,18 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
   const handleAdd = async () => {
     if (qrCodes.length >= 2) {
       alert('Each spot can only hold a maximum of 2 QR codes.');
+
+      // Add the current spot to the fullSpots array if it has exactly 2 QR Codes
+      const spot = { column, row, stack };
+      setFullSpots((prevFullSpots) => {
+        if (!prevFullSpots.some(s => s.column === column && s.row === row && s.stack === stack)) {
+          const updatedSpots = [...prevFullSpots, spot];
+          console.log('Rack Spots with exactly 2 QR Codes:', updatedSpots);
+          return updatedSpots;
+        }
+        return prevFullSpots;
+      });
+
       return;
     }
 
@@ -36,8 +51,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
           const { message, location } = error.response.data;
           alert(message); // Show duplicate QR Code error
           if (location) {
-            // Use handleSearch to trigger the search functionality
-            handleSearch(qrCode);
+            handleSearch(qrCode); // Use handleSearch to trigger the search functionality
           }
         } else {
           console.error('Error adding QR code:', error);
@@ -57,6 +71,15 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
       },
     });
     fetchRacks();
+
+    // If a QR Code is deleted, remove this spot from the fullSpots array if it has less than 2 QR Codes now
+    if (qrCodes.length - 1 < 2) {
+      setFullSpots((prevFullSpots) =>
+        prevFullSpots.filter(
+          (s) => !(s.column === column && s.row === row && s.stack === stack)
+        )
+      );
+    }
   };
 
   return (
