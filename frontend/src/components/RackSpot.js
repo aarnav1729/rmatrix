@@ -35,12 +35,17 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
         if (error.response && error.response.status === 400) {
           const { location } = error.response.data;
 
+          // Debugging: Check if location and handleSearch are defined
+          console.log('Duplicate found at location:', location);
+          console.log('handleSearch is:', handleSearch);
+
           // Show the alert message first
           alert(`QR already exists at ${location.column}-${location.row}-${location.stack}`);
 
           // Use setTimeout to trigger the search functionality after the alert
           if (location) {
             setTimeout(() => {
+              console.log('Calling handleSearch with:', qrCode); // Debugging: Confirm handleSearch call
               handleSearch(qrCode); // Trigger the search functionality after the alert
             }, 0);
           }
