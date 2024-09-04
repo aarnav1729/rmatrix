@@ -48,14 +48,15 @@ app.post('/api/racks', async (req, res) => {
 
     const existingRack = await Rack.findOne({ packages: qrCode });
     if (existingRack) {
-      return res.status(400).json({ 
+      // Return a 200 OK response instead of a 400 error
+      return res.status(200).json({ 
         message: 'QR Code already exists.', 
         location: {
           column: existingRack.column,
           row: existingRack.row,
           stack: existingRack.stack
         }
-      }); 
+      });
     }
 
     let rack = await Rack.findOne({ column, row, stack });
