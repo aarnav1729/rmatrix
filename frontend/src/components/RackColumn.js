@@ -6,7 +6,7 @@ const RackColumn = ({ column, racks, fetchRacks, highlightedSpot, handleSearch }
 
   return (
     <div className="rack-column border flex flex-col items-center bg-gray-900 object-contain">
-      <h2 className="text-center font-bold mb-4 text-gray-900 bg-white">{column}</h2> 
+      <h2 className="text-center font-bold mb-4 text-gray-900 bg-white rounded p-4">{column}</h2> 
       <div className="grid grid-cols-1 w-full">
         {rows.map(row => (
           <RackRow
