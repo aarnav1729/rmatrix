@@ -73,6 +73,22 @@ const Header = ({ onSearch }) => {
               </button>
             </div>
 
+            {/* Right-aligned navigation menu for desktop view */}
+            <div className="hidden lg:flex items-center space-x-4">
+              <ul className={`flex gap-6 ${scrolled ? 'text-black' : 'text-white'}`}>
+                {navLinks.map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      to={link.to}
+                      className={`hover:text-indigo-600 hover:bg-white p-2 rounded font-bold transition ${scrolled ? 'text-black' : 'text-white'} md:px-4`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             {/* Right-aligned hamburger menu for mobile view */}
             <div className="relative flex max-h-10 items-center lg:hidden z-30"> {/* Adjusted z-index */}
               <button
