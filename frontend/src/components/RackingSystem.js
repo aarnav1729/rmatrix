@@ -5,7 +5,7 @@ const RackingSystem = ({ racks, fetchRacks, highlightedSpot, rackRefs, handleSea
   const columns = ['B1', 'B2', 'B3', 'B4'];
 
   return (
-    <div className="racking-system grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+    <div className="racking-system grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-2">
       {columns.map(column => (
         <div key={column} ref={rackRefs[column]}> {/* Attach ref to each rack */}
           <RackColumn
