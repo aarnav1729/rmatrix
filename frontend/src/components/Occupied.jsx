@@ -1,5 +1,4 @@
 import React from 'react';
-import RackColumn from './RackColumn';
 
 const Occupied = ({ racks = [], fullSpots = [] }) => { // Add default values to avoid undefined errors
   const columns = ['B1', 'B2', 'B3', 'B4'];
