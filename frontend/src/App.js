@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import RackingSystem from './components/RackingSystem';
 import Info from './components/Info';
+import Occupied from './components/Occupied'; // Import the new Occupied component
 import BackToTop from './components/BackToTop';
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
             </>
           } />
           <Route path="/info" element={<Info />} />
+          <Route path="/occupied" element={<Occupied racks={racks} fullSpots={fullSpots} fetchRacks={fetchRacks} />} /> {/* New route */}
         </Routes>
         <BackToTop />
       </main>

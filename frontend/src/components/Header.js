@@ -11,7 +11,8 @@ const Header = ({ onSearch }) => {
 
   const navLinks = [
     { to: '/', label: 'Home' },
-    { to: '/info', label: 'Info' }
+    { to: '/info', label: 'Info' },
+    { to: '/occupied', label: 'Occupied' }  // New link for Occupied page
   ];
 
   const toggleNav = () => setOpenNav(!openNav);
