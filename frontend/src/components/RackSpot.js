@@ -18,11 +18,6 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
     }
   }, [isHighlighted]);
 
-  // Log full spots whenever they change
-  useEffect(() => {
-    console.log('Rack Spots with exactly 2 QR Codes:', fullSpots);
-  }, [fullSpots]);
-
   const handleAdd = async () => {
     if (qrCodes.length >= 2) {
       alert('Each spot can only hold a maximum of 2 QR codes.');
