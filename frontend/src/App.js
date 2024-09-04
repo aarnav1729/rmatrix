@@ -40,10 +40,6 @@ function App() {
       });
   };
 
-  const highlightSpot = (column, row, stack) => {
-    setHighlightedSpot({ column, row: Number(row), stack: Number(stack) }); // Highlight the specified spot
-  };
-
   const totalSpots = 1320;
   const occupiedSpots = racks.reduce((acc, rack) => acc + rack.packages.length, 0);
   const openSpots = totalSpots - occupiedSpots;
@@ -63,8 +59,8 @@ function App() {
         <Routes>
           <Route path="/" element={
             <>
-              <Dashboard total={totalSpots} open={openSpots} occupied={occupiedSpots} rackRefs={rackRefs} /> {/* Pass rackRefs */}
-              <RackingSystem racks={racks} fetchRacks={fetchRacks} highlightedSpot={highlightedSpot} rackRefs={rackRefs} highlightSpot={highlightSpot} /> {/* Pass highlightSpot */}
+              <Dashboard total={totalSpots} open={openSpots} occupied={occupiedSpots} rackRefs={rackRefs} />
+              <RackingSystem racks={racks} fetchRacks={fetchRacks} highlightedSpot={highlightedSpot} rackRefs={rackRefs} setHighlightedSpot={setHighlightedSpot} /> {/* Pass setHighlightedSpot */}
             </>
           } />
           <Route path="/info" element={<Info />} />

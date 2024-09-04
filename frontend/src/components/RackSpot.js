@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, highlightSpot }) => {
+const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, setHighlightedSpot }) => { // Use setHighlightedSpot
   const [qrCodes, setQrCodes] = useState(packages);
   const spotRef = useRef(null);
 
@@ -36,8 +36,8 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, hig
           const { message, location } = error.response.data;
           alert(message); // Show duplicate QR Code error
           if (location) {
-            // Highlight the existing spot where the QR code is already present
-            highlightSpot(location.column, location.row, location.stack);
+            // Use setHighlightedSpot to highlight the existing spot where the QR code is already present
+            setHighlightedSpot({ column: location.column, row: Number(location.row), stack: Number(location.stack) });
           }
         } else {
           console.error('Error adding QR code:', error);
