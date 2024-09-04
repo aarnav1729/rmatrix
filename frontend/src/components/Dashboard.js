@@ -6,6 +6,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Dashboard = ({ total, open, occupied, rackRefs }) => { // Accept rackRefs as props
   const percentageOccupied = ((occupied / total) * 100).toFixed(2);
+  console.log('Percentage Occupied:', percentageOccupied);
 
   const scrollToRack = (rack) => {
     if (rackRefs[rack] && rackRefs[rack].current) {
