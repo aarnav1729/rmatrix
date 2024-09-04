@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted }) => {
+const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, setHighlightedSpot }) => {
   const [qrCodes, setQrCodes] = useState(packages);
   const spotRef = useRef(null);
 
@@ -35,38 +35,21 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted }) =
         if (error.response && error.response.status === 400) {
           const { location } = error.response.data;
 
-          // Show the alert message first
+          // Show the alert message
           alert(`QR already exists at ${location.column}-${location.row}-${location.stack}`);
 
-          // Call the function to highlight the spot by searching for the QR code
-          if (qrCode) {
-            searchAndHighlight(qrCode);  // Pass the QR code instead of location
+          // Call setHighlightedSpot to highlight and scroll to the duplicate spot
+          if (location) {
+            setHighlightedSpot({
+              column: location.column,
+              row: Number(location.row),
+              stack: Number(location.stack),
+            });
           }
         } else {
           console.error('Error adding QR code:', error);
         }
       }
-    }
-  };
-
-  // Internal function to search and highlight the duplicate QR code
-  const searchAndHighlight = async (qrCode) => {
-    try {
-      const response = await axios.get(`https://rmatrix.onrender.com/api/racks/search?qrCode=${qrCode}`);
-      if (response.data.location) {
-        // Extract the column, row, and stack from the location data
-        const [foundColumn, foundRow, foundStack] = response.data.location.split('-');
-        // If this spot is the one with the duplicate, scroll to it
-        if (
-          foundColumn === column &&
-          Number(foundRow) === row &&
-          Number(foundStack) === stack
-        ) {
-          spotRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }
-    } catch (error) {
-      console.error('Error searching for QR code:', error);
     }
   };
 

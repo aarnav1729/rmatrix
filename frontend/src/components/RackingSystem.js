@@ -1,7 +1,7 @@
 import React from 'react';
 import RackColumn from './RackColumn';
 
-const RackingSystem = ({ racks, fetchRacks, highlightedSpot, rackRefs, handleSearch }) => { // Accept handleSearch as props
+const RackingSystem = ({ racks, fetchRacks, highlightedSpot, rackRefs, setHighlightedSpot ,handleSearch }) => { // Accept handleSearch as props
   const columns = ['B1', 'B2', 'B3', 'B4'];
 
   return (
@@ -13,6 +13,7 @@ const RackingSystem = ({ racks, fetchRacks, highlightedSpot, rackRefs, handleSea
             racks={racks.filter(rack => rack.column === column)}
             fetchRacks={fetchRacks}
             highlightedSpot={highlightedSpot}
+            setHighlightedSpot={setHighlightedSpot} // Pass down setHighlightedSpot
             handleSearch={handleSearch} // Pass down handleSearch
           />
         </div>
