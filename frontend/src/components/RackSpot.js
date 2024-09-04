@@ -5,7 +5,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
   const [qrCodes, setQrCodes] = useState(packages);
   const spotRef = useRef(null);
 
-  // Array to keep track of all spots with exactly 2 QR Codes
+  // State to keep track of all spots with exactly 2 QR Codes
   const [fullSpots, setFullSpots] = useState([]);
 
   useEffect(() => {
@@ -18,6 +18,11 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
     }
   }, [isHighlighted]);
 
+  // Log full spots whenever they change
+  useEffect(() => {
+    console.log('Rack Spots with exactly 2 QR Codes:', fullSpots);
+  }, [fullSpots]);
+
   const handleAdd = async () => {
     if (qrCodes.length >= 2) {
       alert('Each spot can only hold a maximum of 2 QR codes.');
@@ -26,10 +31,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
       const spot = { column, row, stack };
       setFullSpots((prevFullSpots) => {
         if (!prevFullSpots.some(s => s.column === column && s.row === row && s.stack === stack)) {
-          const updatedSpots = [...prevFullSpots, spot];
-          console.log('Rack Spots with exactly 2 QR Codes:', updatedSpots);
-          console.log('ignore this', fullSpots);
-          return updatedSpots;
+          return [...prevFullSpots, spot];
         }
         return prevFullSpots;
       });
