@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, handleSearch }) => { 
+const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted }) => {
   const [qrCodes, setQrCodes] = useState(packages);
   const spotRef = useRef(null);
 
@@ -35,24 +35,38 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
         if (error.response && error.response.status === 400) {
           const { location } = error.response.data;
 
-          // Debugging: Check if location and handleSearch are defined
-          console.log('Duplicate found at location:', location);
-          console.log('handleSearch is:', handleSearch);
-
           // Show the alert message first
           alert(`QR already exists at ${location.column}-${location.row}-${location.stack}`);
 
-          // Use setTimeout to trigger the search functionality after the alert
+          // Replicate the search functionality here to highlight the duplicate spot
           if (location) {
-            setTimeout(() => {
-              console.log('Calling handleSearch with:', qrCode); // Debugging: Confirm handleSearch call
-              handleSearch(qrCode); // Trigger the search functionality after the alert
-            }, 0);
+            searchAndHighlight(location);
           }
         } else {
           console.error('Error adding QR code:', error);
         }
       }
+    }
+  };
+
+  // Internal function to search and highlight the duplicate QR code
+  const searchAndHighlight = async (location) => {
+    try {
+      const response = await axios.get(`https://rmatrix.onrender.com/api/racks/search?qrCode=${location.qrCode}`);
+      if (response.data.location) {
+        // Extract the column, row, and stack from the location data
+        const [foundColumn, foundRow, foundStack] = response.data.location.split('-');
+        // If this spot is the one with the duplicate, scroll to it
+        if (
+          foundColumn === column &&
+          Number(foundRow) === row &&
+          Number(foundStack) === stack
+        ) {
+          spotRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    } catch (error) {
+      console.error('Error searching for QR code:', error);
     }
   };
 
