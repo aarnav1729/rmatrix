@@ -35,13 +35,15 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, han
         if (error.response && error.response.status === 400) {
           const { location } = error.response.data;
 
-          // Trigger the search functionality first
-          if (location) {
-            handleSearch(qrCode);
-          }
-
-          // Show the alert message after the search functionality is triggered
+          // Show the alert message first
           alert(`QR already exists at ${location.column}-${location.row}-${location.stack}`);
+
+          // Use setTimeout to trigger the search functionality after the alert
+          if (location) {
+            setTimeout(() => {
+              handleSearch(qrCode); // Trigger the search functionality after the alert
+            }, 0);
+          }
         } else {
           console.error('Error adding QR code:', error);
         }
