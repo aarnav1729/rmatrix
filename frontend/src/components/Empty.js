@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const Empty = ({ racks = [] }) => {
+const Empty = ({ racks = [], emptySpots = [] }) => {
   const columns = ['B1', 'B2', 'B3', 'B4'];
 
   return (
@@ -12,7 +12,9 @@ const Empty = ({ racks = [] }) => {
           <h2 className="text-center font-bold mb-4 mt-2 text-gray-900 bg-white rounded-full p-4">{column}</h2>
           <div className="grid grid-cols-1 w-full">
             {racks.filter(rack => rack.column === column).map(rack => (
-              rack.packages.length === 0 && ( // Check for empty spots
+              rack.packages.length === 0 && emptySpots.some(spot =>
+                spot.column === rack.column && spot.row === rack.row && spot.stack === rack.stack
+              ) && (
                 <div
                   key={`${rack.column}-${rack.row}-${rack.stack}`}
                   className="rack-spot border flex flex-col justify-between items-center bg-gray-700 rounded-lg shadow-md p-4 mb-4"

@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Dashboard from './components/Dashboard';
 import RackingSystem from './components/RackingSystem';
 import Info from './components/Info';
-import Occupied from './components/Occupied'; // Import the new Occupied component
+import Occupied from './components/Occupied';
 import BackToTop from './components/BackToTop';
 import Empty from './components/Empty';
 
@@ -14,6 +14,7 @@ function App() {
   const [racks, setRacks] = useState([]);
   const [highlightedSpot, setHighlightedSpot] = useState(null); // New state for highlighted spot
   const [fullSpots, setFullSpots] = useState([]); // State to store spots with exactly 2 QR Codes
+  const [emptySpots, setEmptySpots] = useState([]);
 
   useEffect(() => {
     fetchRacks();
@@ -28,6 +29,9 @@ function App() {
 
       // Calculate full spots after fetching racks
       const spotsWithTwoQRCodes = [];
+      // Calculate empty spots after fetching racks
+      const spotsWithZeroQRCodes = [];
+
       response.data.forEach(rack => {
         if (rack.packages.length === 2) {
           spotsWithTwoQRCodes.push({
@@ -36,8 +40,18 @@ function App() {
             stack: rack.stack
           });
         }
+
+        // Check for spots with zero QR codes
+        if (rack.packages.length === 0) {
+          spotsWithZeroQRCodes.push({
+            column: rack.column,
+            row: rack.row,
+            stack: rack.stack
+          });
+        }
       });
       setFullSpots(spotsWithTwoQRCodes); // Update state with full spots
+      setEmptySpots(spotsWithZeroQRCodes); // Update state with empty spots
     } catch (error) {
       console.error('Error fetching racks:', error);
     }
