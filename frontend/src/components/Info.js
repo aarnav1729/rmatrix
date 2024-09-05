@@ -9,7 +9,7 @@ const Info = () => {
           <h1 className="text-4xl font-bold mb-6 text-center">
             Racking System Application Overview
           </h1>
-          <p className="mb-8 text-lg leading-relaxed text-gray-300">
+          <p className="mb-8 text-lg leading-relaxed text-white">
             This application provides a comprehensive visualization of a
             factory's racking system, leveraging QR codes for package tracking.
             Built with a modern tech stack featuring React, Tailwind CSS, and
@@ -22,11 +22,11 @@ const Info = () => {
             <h2 className="text-3xl font-bold mb-4 border-b-2 border-blue-600 pb-2">
               Frontend
             </h2>
-            <p className="mb-6 text-lg text-white">
+            <p className="mb-6 text-xl text-white">
               The frontend is built with React and styled using Tailwind CSS for
               a sleek and responsive design. Key components include:
             </p>
-            <ul className="list-disc list-inside mb-6 space-y-3 text-white">
+            <ul className="list-disc text-lg list-inside mb-6 space-y-3 text-white">
               <li>
                 <strong>App.js:</strong> The root component managing global
                 state and integrating all other components.
@@ -69,12 +69,12 @@ const Info = () => {
             <h2 className="text-3xl font-bold mb-4 border-b-2 border-blue-600 pb-2">
               Backend
             </h2>
-            <p className="mb-6 text-lg text-white">
+            <p className="mb-6 text-xl text-white">
               The backend is powered by Express.js and integrates seamlessly
               with MongoDB to store and manage racking data. Key backend
               components include:
             </p>
-            <ul className="list-disc list-inside mb-6 space-y-3 text-white">
+            <ul className="list-disc text-lg list-inside mb-6 space-y-3 text-white">
               <li>
                 <strong>server.js:</strong> The entry point for the server-side
                 logic, handling routing and middleware setup.
@@ -91,7 +91,7 @@ const Info = () => {
             <h2 className="text-3xl font-bold mb-4 border-b-2 border-blue-600 pb-2">
               Key Functionality
             </h2>
-            <ul className="list-disc list-inside mb-6 space-y-3 text-white">
+            <ul className="list-disc text-lg list-inside mb-6 space-y-3 text-white">
               <li>
                 <strong>Visualizing the Racking System:</strong> Presents the
                 entire racking system in an intuitive grid layout with real-time
