@@ -5,7 +5,7 @@ const Empty = ({ racks, fetchRacks, fullSpots }) => {
   const columns = ['B1', 'B2', 'B3', 'B4'];
 
   return (
-    <div className="empty-system grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-2">
+    <div className="racking-system grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-2">
       {columns.map(column => (
         <div key={column}>
           <RackColumn
