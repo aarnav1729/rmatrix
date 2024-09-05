@@ -106,7 +106,8 @@ function App() {
           } />
           <Route path="/info" element={<Info />} />
           <Route path="/occupied" element={<Occupied racks={racks} fullSpots={fullSpots} fetchRacks={fetchRacks} />} />
-          <Route path="/empty" element={<Empty racks={racks} emptySpots={emptySpots} fetchRacks={fetchRacks} />} /> {/* Pass emptySpots prop */}
+          <Route path="/empty" element={<Empty racks={racks} fullSpots={fullSpots} fetchRacks={fetchRacks} />} />
+
         </Routes>
         <BackToTop />
       </main>
