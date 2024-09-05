@@ -9,11 +9,15 @@ const Header = ({ onSearch }) => {
   const [scrolled, setScrolled] = useState(false);
   const [searchTerm, setSearchTerm] = useState(''); // State for search input
 
-  const navLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/info', label: 'Info' },
-    { to: '/occupied', label: 'Occupied' }  // New link for Occupied page
-  ];
+// Update the navLinks array to include the new route
+
+const navLinks = [
+  { to: '/', label: 'Home' },
+  { to: '/info', label: 'Info' },
+  { to: '/occupied', label: 'Occupied' },
+  { to: '/empty', label: 'Empty' } 
+];
+
 
   const toggleNav = () => setOpenNav(!openNav);
 

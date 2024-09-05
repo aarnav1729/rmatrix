@@ -8,6 +8,7 @@ import RackingSystem from './components/RackingSystem';
 import Info from './components/Info';
 import Occupied from './components/Occupied'; // Import the new Occupied component
 import BackToTop from './components/BackToTop';
+import Empty from './components/Empty';
 
 function App() {
   const [racks, setRacks] = useState([]);
@@ -85,7 +86,8 @@ function App() {
             </>
           } />
           <Route path="/info" element={<Info />} />
-          <Route path="/occupied" element={<Occupied racks={racks} fullSpots={fullSpots} fetchRacks={fetchRacks} />} /> {/* New route */}
+          <Route path="/occupied" element={<Occupied racks={racks} fullSpots={fullSpots} fetchRacks={fetchRacks} />} />
+          <Route path="/empty" element={<Empty racks={racks} />} />
         </Routes>
         <BackToTop />
       </main>
