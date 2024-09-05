@@ -1,7 +1,7 @@
 import React from 'react';
 import RackColumn from './RackColumn';
 
-const Empty = ({ racks, fetchRacks }) => {
+const Empty = ({ racks, fetchRacks, fullSpots }) => {
   const columns = ['B1', 'B2', 'B3', 'B4'];
 
   return (
@@ -12,6 +12,7 @@ const Empty = ({ racks, fetchRacks }) => {
             column={column}
             racks={racks.filter(rack => rack.column === column)}
             fetchRacks={fetchRacks}
+            fullSpots={fullSpots} 
           />
         </div>
       ))}

@@ -1,7 +1,7 @@
 import React from 'react';
 import RackSpot from './RackSpot';
 
-const RackRow = ({ row, stacks, column, fetchRacks, highlightedSpot, setHighlightedSpot ,handleSearch }) => { // Accept handleSearch as prop
+const RackRow = ({ row, stacks, column, fetchRacks, highlightedSpot, setHighlightedSpot, handleSearch, fullSpots }) => { // Accept handleSearch as prop
   const stackPositions = Array.from({ length: 5 }, (_, index) => index + 1);
 
   return (
@@ -19,6 +19,7 @@ const RackRow = ({ row, stacks, column, fetchRacks, highlightedSpot, setHighligh
             isHighlighted={highlightedSpot && highlightedSpot.column === column && highlightedSpot.row === row && highlightedSpot.stack === stack} // Determine if the spot is highlighted
             setHighlightedSpot={setHighlightedSpot} // Pass down setHighlightedSpot
             handleSearch={handleSearch} // Pass down handleSearch
+            fullSpots={fullSpots} // Pass down fullSpots
           />
         );
       })}
