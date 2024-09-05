@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, setHighlightedSpot }) => {
+const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, setHighlightedSpot, isFullSpotHidden }) => {
   const [qrCodes, setQrCodes] = useState(packages);
   const spotRef = useRef(null);
 
@@ -71,6 +71,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, set
       ref={spotRef}
       className={`rack-spot border flex flex-col justify-between items-center bg-gray-700 rounded-lg shadow-md 
                  w-[90%] h-[90%] min-h-[70px] min-w-[70px] mx-auto ${isHighlighted ? 'bg-yellow-500' : ''}`}
+                 style={{ opacity: isFullSpotHidden ? 0 : 1 }} 
     >
       <h3 className="text-center text-white">{`${column},${row},${stack}`}</h3>
       <div className="flex flex-col items-center w-full">

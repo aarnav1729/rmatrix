@@ -1,7 +1,7 @@
 import React from 'react';
 import RackRow from './RackRow';
 
-const RackColumn = ({ column, racks, fetchRacks, highlightedSpot, setHighlightedSpot ,handleSearch }) => { 
+const RackColumn = ({ column, racks, fetchRacks, highlightedSpot, setHighlightedSpot, handleSearch, isFullSpotHidden }) => { 
   const rows = Array.from({ length: 33 }, (_, index) => index + 1);
 
   return (
@@ -18,6 +18,7 @@ const RackColumn = ({ column, racks, fetchRacks, highlightedSpot, setHighlighted
             highlightedSpot={highlightedSpot}
             setHighlightedSpot={setHighlightedSpot} // Pass down setHighlightedSpot
             handleSearch={handleSearch} // Pass down handleSearch
+            isFullSpotHidden={isFullSpotHidden} // Pass down isFullSpotHidden
           />
         ))}
       </div>

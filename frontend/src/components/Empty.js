@@ -8,7 +8,7 @@ const Empty = ({ racks, fetchRacks }) => {
   // Calculate spots with exactly 2 QR Codes
   useEffect(() => {
     const spotsWithTwoQRCodes = [];
-    
+
     racks.forEach(rack => {
       if (rack.packages.length === 2) {  // Find racks with exactly 2 QR Codes
         spotsWithTwoQRCodes.push({
@@ -30,12 +30,13 @@ const Empty = ({ racks, fetchRacks }) => {
             column={column}
             racks={racks.filter(rack => rack.column === column)}
             fetchRacks={fetchRacks}
-            fullSpots={fullSpots} // Pass the calculated fullSpots to RackColumn
+            fullSpots={fullSpots}  // Pass the calculated fullSpots to RackColumn
+            isFullSpotHidden={true}  // Prop to control hiding spots with exactly 2 QR Codes
           />
         </div>
       ))}
     </div>
   );
-};
+}
 
 export default Empty;
