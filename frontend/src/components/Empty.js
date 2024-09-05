@@ -1,7 +1,6 @@
 // src/components/Empty.js
 
 import React from 'react';
-import RackColumn from './RackColumn';
 
 const Empty = ({ racks = [], fullSpots = [], fetchRacks }) => {
   const columns = ['B1', 'B2', 'B3', 'B4'];
