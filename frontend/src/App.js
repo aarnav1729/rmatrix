@@ -59,6 +59,7 @@ function App() {
 
   useEffect(() => {
     if (fullSpots.length > 0) {
+      console.log('Rack Spots with exactly 0 QR Codes:', emptySpots);
       console.log('Rack Spots with exactly 2 QR Codes:', fullSpots);
     }
   }, [fullSpots]); // Log full spots only once after they are calculated
