@@ -68,7 +68,7 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
         <div className="flex flex-col items-center">
           <div className="text-3xl font-bold text-white">{occupied}</div>
           <div className="text-white">Occupied</div>
-          <Link to="/occupied" className="bg-blue-500 text-white p-2 rounded-lh hover:bg-white hover:text-blue-500">Occupied</Link>
+          <Link to="/occupied" className="bg-blue-500 text-white p-2 rounded-lg hover:bg-white hover:text-blue-500">Occupied</Link>
         </div>
         <div className="flex flex-col items-center">
           <div className="text-3xl font-bold text-white">{open}</div>
