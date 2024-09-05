@@ -9,6 +9,7 @@ const Empty = ({ racks, fetchRacks }) => {
     row: rack.row,
     stack: rack.stack,
   }));
+  console.log(fullSpots);
 
   // Function to check if a spot should be hidden
   const shouldHideSpot = (column, row, stack) => {
