@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, setHighlightedSpot, fullSpots }) => {
+const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, setHighlightedSpot }) => {
   const [qrCodes, setQrCodes] = useState(packages);
   const spotRef = useRef(null);
 
@@ -15,12 +15,6 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, set
     }
   }, [isHighlighted]);
 
-  // Check if the current spot is in the fullSpots array
-  const isOccupied = fullSpots.some(
-    spot => spot.column === column && spot.row === row && spot.stack === stack
-  );
-  console.log('isOccupied:', isOccupied);
-  
   const handleAdd = async () => {
     if (qrCodes.length >= 2) {
       alert('Each spot can only hold a maximum of 2 QR codes.');
@@ -100,5 +94,3 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, set
 };
 
 export default RackSpot;
-
-
