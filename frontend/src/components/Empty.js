@@ -9,7 +9,6 @@ const Empty = ({ racks, fetchRacks }) => {
     row: rack.row,
     stack: rack.stack,
   }));
-  console.log(fullSpots);
 
   // Function to check if a spot should be hidden
   const shouldHideSpot = (column, row, stack) => {
@@ -26,7 +25,7 @@ const Empty = ({ racks, fetchRacks }) => {
           <div className="grid grid-cols-1 w-full">
             {Array.from({ length: 33 }, (_, rowIndex) => rowIndex + 1).map(row => (
               <div key={`${column}-${row}`} className="w-full">
-                <div className="rack-row grid grid-cols-5 w-full mr-2 object-contain">
+                <div className="rack-row grid grid-cols-5 w-full mr-2 object-contain gap-2"> {/* Added gap for consistency */}
                   {Array.from({ length: 5 }, (_, stackIndex) => stackIndex + 1).map(stack => {
                     const rack = racks.find(r => r.column === column && r.row === row && r.stack === stack) || { packages: [] };
 
@@ -36,7 +35,8 @@ const Empty = ({ racks, fetchRacks }) => {
                     return (
                       <div
                         key={`${column}-${row}-${stack}`}
-                        className={`rack-spot border flex flex-col justify-between items-center bg-gray-700 rounded-lg shadow-md p-4 mb-4 ${opacityClass}`}
+                        className={`rack-spot border flex flex-col justify-between items-center bg-gray-700 rounded-lg shadow-md 
+                                    w-[90%] h-[90%] min-h-[70px] min-w-[70px] mx-auto p-2 ${opacityClass}`} 
                       >
                         <h3 className="text-center text-white font-bold mb-2">{`${column} - Row: ${row}, Stack: ${stack}`}</h3>
                         {rack.packages.length > 0 ? (
