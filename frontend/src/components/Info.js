@@ -10,11 +10,11 @@ const Info = () => {
             Racking System Application Overview
           </h1>
           <p className="mb-8 text-lg leading-relaxed text-white">
-            This application provides a comprehensive visualization of a
+            This application provides a comprehensive visualization of the
             factory's racking system, leveraging QR codes for package tracking.
             Built with a modern tech stack featuring React, Tailwind CSS, and
             Express.js, it offers a dynamic and interactive user experience for
-            managing inventory.
+            managing raw material inventory in a matrix that updates in real-time.
           </p>
 
           {/* Frontend Section */}
