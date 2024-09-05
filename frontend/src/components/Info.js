@@ -6,14 +6,6 @@ const Info = () => {
     <div className="flex flex-col min-h-screen bg-gray-900 text-white">
       <main className="flex-grow p-6">
         <div className="bg-gray-800 p-6 rounded-lg text-white shadow-lg">
-          {/* Back Button */}
-          <Link
-            to="/"
-            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded inline-flex items-center mb-6"
-          >
-            <i className="fas fa-arrow-left mr-2"></i> Back to Home
-          </Link>
-
           {/* Header Section */}
           <h1 className="text-4xl font-bold mb-6 text-center">
             Racking System Application Overview
@@ -31,11 +23,11 @@ const Info = () => {
             <h2 className="text-3xl font-bold mb-4 border-b-2 border-blue-600 pb-2">
               Frontend
             </h2>
-            <p className="mb-6 text-lg text-gray-300">
+            <p className="mb-6 text-lg text-white">
               The frontend is built with React and styled using Tailwind CSS for
               a sleek and responsive design. Key components include:
             </p>
-            <ul className="list-disc list-inside mb-6 space-y-3 text-gray-400">
+            <ul className="list-disc list-inside mb-6 space-y-3 text-white">
               <li>
                 <strong>App.js:</strong> The root component managing global
                 state and integrating all other components.
@@ -78,12 +70,12 @@ const Info = () => {
             <h2 className="text-3xl font-bold mb-4 border-b-2 border-blue-600 pb-2">
               Backend
             </h2>
-            <p className="mb-6 text-lg text-gray-300">
+            <p className="mb-6 text-lg text-white">
               The backend is powered by Express.js and integrates seamlessly
               with MongoDB to store and manage racking data. Key backend
               components include:
             </p>
-            <ul className="list-disc list-inside mb-6 space-y-3 text-gray-400">
+            <ul className="list-disc list-inside mb-6 space-y-3 text-white">
               <li>
                 <strong>server.js:</strong> The entry point for the server-side
                 logic, handling routing and middleware setup.
@@ -100,7 +92,7 @@ const Info = () => {
             <h2 className="text-3xl font-bold mb-4 border-b-2 border-blue-600 pb-2">
               Key Functionality
             </h2>
-            <ul className="list-disc list-inside mb-6 space-y-3 text-gray-400">
+            <ul className="list-disc list-inside mb-6 space-y-3 text-white">
               <li>
                 <strong>Visualizing the Racking System:</strong> Presents the
                 entire racking system in an intuitive grid layout with real-time
@@ -125,20 +117,6 @@ const Info = () => {
                 devices.
               </li>
             </ul>
-          </section>
-
-          {/* Conclusion and Return Button */}
-          <section className="text-center">
-            <p className="text-lg text-gray-300 mb-8">
-              Explore the application to manage and visualize your factory's
-              inventory in an interactive and efficient way!
-            </p>
-            <Link
-              to="/"
-              className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded inline-flex items-center"
-            >
-              <i className="fas fa-arrow-left mr-2"></i> Back to Home
-            </Link>
           </section>
         </div>
       </main>
