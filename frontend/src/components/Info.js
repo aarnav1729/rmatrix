@@ -4,119 +4,142 @@ import { Link } from "react-router-dom";
 const Info = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-900 text-white">
-      <main className="flex-grow p-4">
-        <div className="bg-gray-800 p-4 rounded-lg text-white">
+      <main className="flex-grow p-6">
+        <div className="bg-gray-800 p-6 rounded-lg text-white shadow-lg">
+          {/* Back Button */}
           <Link
             to="/"
-            className="bg-blue-500 text-white p-2 rounded inline-flex w-full items-center"
+            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded inline-flex items-center mb-6"
           >
-            <i className="fas fa-arrow-left"></i>
+            <i className="fas fa-arrow-left mr-2"></i> Back to Home
           </Link>
-          <h1 className="text-2xl font-bold mb-4 mt-4">
-            Racking System Application
+
+          {/* Header Section */}
+          <h1 className="text-4xl font-bold mb-6 text-center">
+            Racking System Application Overview
           </h1>
-          <p className="mb-4">
-            This application was built to visualize a factory's racking system
-            with QR codes for package tracking. The application consists of a
-            React frontend and an Express.js backend, with MongoDB as the
-            database.
+          <p className="mb-8 text-lg leading-relaxed text-gray-300">
+            This application provides a comprehensive visualization of a
+            factory's racking system, leveraging QR codes for package tracking.
+            Built with a modern tech stack featuring React, Tailwind CSS, and
+            Express.js, it offers a dynamic and interactive user experience for
+            managing inventory.
           </p>
 
-          <h2 className="text-xl font-bold mb-2">Frontend</h2>
-          <p className="mb-4">
-            The frontend is built using React and styled with Tailwind CSS. Key
-            components include:
-          </p>
-          <ul className="list-decimal list-inside mb-4">
-            <li>
-              <strong>App.js:</strong> The main component that holds the state
-              and integrates other components.
-            </li>
-            <li>
-              <strong>Header.js:</strong> Contains the navigation and search bar
-              functionality.
-            </li>
-            <li>
-              <strong>Footer.js:</strong> A simple footer with navigation links.
-            </li>
-            <li>
-              <strong>Dashboard.js:</strong> Displays stats like total spots,
-              open spots, and occupied spots, and includes a circular status
-              bar.
-            </li>
-            <li>
-              <strong>RackingSystem.js:</strong> The main grid layout displaying
-              the racking system.
-            </li>
-            <li>
-              <strong>RackColumn.js:</strong> Represents each column in the
-              racking system.
-            </li>
-            <li>
-              <strong>RackRow.js:</strong> Represents each row in a column.
-            </li>
-            <li>
-              <strong>RackSpot.js:</strong> Represents each spot in a row and
-              manages QR code additions and deletions.
-            </li>
-          </ul>
+          {/* Frontend Section */}
+          <section className="mb-8">
+            <h2 className="text-3xl font-bold mb-4 border-b-2 border-blue-600 pb-2">
+              Frontend
+            </h2>
+            <p className="mb-6 text-lg text-gray-300">
+              The frontend is built with React and styled using Tailwind CSS for
+              a sleek and responsive design. Key components include:
+            </p>
+            <ul className="list-disc list-inside mb-6 space-y-3 text-gray-400">
+              <li>
+                <strong>App.js:</strong> The root component managing global
+                state and integrating all other components.
+              </li>
+              <li>
+                <strong>Header.js:</strong> Provides navigation and search
+                functionality with a sleek, responsive design.
+              </li>
+              <li>
+                <strong>Footer.js:</strong> Contains quick links and contact
+                information in a concise footer.
+              </li>
+              <li>
+                <strong>Dashboard.js:</strong> Features dynamic stats,
+                including total spots, open spots, occupied spots, and a
+                graphical representation of occupancy.
+              </li>
+              <li>
+                <strong>RackingSystem.js:</strong> The core layout that displays
+                the racking system in a grid format for easy visualization.
+              </li>
+              <li>
+                <strong>RackColumn.js:</strong> Manages each column's layout
+                within the racking system.
+              </li>
+              <li>
+                <strong>RackRow.js:</strong> Structures each row within a
+                column, supporting detailed QR code management.
+              </li>
+              <li>
+                <strong>RackSpot.js:</strong> Handles the individual spots where
+                packages are managed, supporting add and delete operations for
+                QR codes.
+              </li>
+            </ul>
+          </section>
 
-          <h2 className="text-xl font-bold mb-2">Backend</h2>
-          <p className="mb-4">
-            The backend is built using Express.js and connects to MongoDB for
-            data storage. Key components include:
-          </p>
-          <ul className="list-decimal list-inside mb-4">
-            <li>
-              <strong>server.js:</strong> The main server file that sets up
-              routes and connects to MongoDB.
-            </li>
-            <li>
-              <strong>MongoDB:</strong> Used to store the racking system data,
-              including QR codes and their locations.
-            </li>
-          </ul>
+          {/* Backend Section */}
+          <section className="mb-8">
+            <h2 className="text-3xl font-bold mb-4 border-b-2 border-blue-600 pb-2">
+              Backend
+            </h2>
+            <p className="mb-6 text-lg text-gray-300">
+              The backend is powered by Express.js and integrates seamlessly
+              with MongoDB to store and manage racking data. Key backend
+              components include:
+            </p>
+            <ul className="list-disc list-inside mb-6 space-y-3 text-gray-400">
+              <li>
+                <strong>server.js:</strong> The entry point for the server-side
+                logic, handling routing and middleware setup.
+              </li>
+              <li>
+                <strong>MongoDB:</strong> Stores the racking system structure,
+                QR code data, and inventory details.
+              </li>
+            </ul>
+          </section>
 
-          <h2 className="text-xl font-bold mb-2">Functionality</h2>
-          <p className="mb-4">
-            The application supports the following functionality:
-          </p>
-          <ul className="list-decimal list-inside mb-4">
-            <li>
-              <strong>Visualizing the Racking System:</strong> Displays the
-              entire racking system as a grid of columns, rows, and spots.
-            </li>
-            <li>
-              <strong>Adding QR Codes:</strong> Allows users to add QR codes to
-              specific spots, with a maximum of 2 QR codes per spot.
-            </li>
-            <li>
-              <strong>Deleting QR Codes:</strong> Allows users to delete QR
-              codes from specific spots.
-            </li>
-            <li>
-              <strong>Searching QR Codes:</strong> Allows users to search for a
-              QR code and find its location in the racking system.
-            </li>
-            <li>
-              <strong>Dynamic Stats:</strong> Displays dynamic statistics about
-              total spots, open spots, and occupied spots, with a circular
-              status bar showing the percentage of occupied spots.
-            </li>
-          </ul>
+          {/* Functionality Section */}
+          <section className="mb-8">
+            <h2 className="text-3xl font-bold mb-4 border-b-2 border-blue-600 pb-2">
+              Key Functionality
+            </h2>
+            <ul className="list-disc list-inside mb-6 space-y-3 text-gray-400">
+              <li>
+                <strong>Visualizing the Racking System:</strong> Presents the
+                entire racking system in an intuitive grid layout with real-time
+                updates.
+              </li>
+              <li>
+                <strong>QR Code Management:</strong> Allows adding and deleting
+                QR codes for precise tracking of inventory items in each spot.
+              </li>
+              <li>
+                <strong>Search Functionality:</strong> Provides a quick and
+                efficient way to search and locate specific QR codes.
+              </li>
+              <li>
+                <strong>Dynamic Statistics:</strong> Showcases real-time stats
+                such as total spots, open spots, and occupied spots with a
+                visually engaging circular progress bar.
+              </li>
+              <li>
+                <strong>Responsive Design:</strong> Ensures that the application
+                adapts beautifully to any screen size, from desktops to mobile
+                devices.
+              </li>
+            </ul>
+          </section>
 
-          <h2 className="text-xl font-bold mb-2">Responsiveness</h2>
-          <p className="mb-4">
-            The application is fully responsive, adapting to different screen
-            sizes using Tailwind CSS classes for media queries.
-          </p>
-
-          <Link
-            to="/"
-            className="bg-blue-500 text-white p-2 rounded inline-flex w-full items-center"
-          >
-            <i className="fas fa-arrow-left"></i>
-          </Link>
+          {/* Conclusion and Return Button */}
+          <section className="text-center">
+            <p className="text-lg text-gray-300 mb-8">
+              Explore the application to manage and visualize your factory's
+              inventory in an interactive and efficient way!
+            </p>
+            <Link
+              to="/"
+              className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded inline-flex items-center"
+            >
+              <i className="fas fa-arrow-left mr-2"></i> Back to Home
+            </Link>
+          </section>
         </div>
       </main>
     </div>
