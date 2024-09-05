@@ -4,6 +4,7 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { Link } from 'react-router-dom';
 
+
 am4core.useTheme(am4themes_animated);
 
 const Dashboard = ({ total, open, occupied, rackRefs }) => {
@@ -67,12 +68,12 @@ const Dashboard = ({ total, open, occupied, rackRefs }) => {
         <div className="flex flex-col items-center">
           <div className="text-3xl font-bold text-white">{occupied}</div>
           <div className="text-white">Occupied</div>
-          <Link to="/occupied" className="bg-blue-500 text-white p-2 rounded hover:underline">View Details</Link>
+          <Link to="/occupied" className="bg-blue-500 text-white p-2 rounded-lh hover:bg-white hover:text-blue-500">Occupied</Link>
         </div>
         <div className="flex flex-col items-center">
           <div className="text-3xl font-bold text-white">{open}</div>
           <div className="text-white">Open</div>
-          <Link to="/empty" className="bg-blue-500 text-white rounded p-2 hover:underline">View Details</Link>
+          <Link to="/empty" className="bg-blue-500 text-white rounded-lg p-2 hover:bg-white hover:text-blue-500">Empty</Link>
         </div>
         <div className="flex flex-col items-center">
           <div className="text-3xl font-bold text-white">{total}</div>
