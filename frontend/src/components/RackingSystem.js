@@ -2,8 +2,9 @@
 
 import React from 'react';
 import RackColumn from './RackColumn';
+import RackSpot from './RackSpot';
 
-const RackingSystem = ({ racks, fetchRacks, highlightedSpot, rackRefs, setHighlightedSpot, isSpotOccupied, handleSearch }) => {
+const RackingSystem = ({ racks, fetchRacks, highlightedSpot, rackRefs, setHighlightedSpot, RackSpotComponent = RackSpot, handleSearch }) => {
   const columns = ['B1', 'B2', 'B3', 'B4'];
 
   return (
@@ -16,7 +17,7 @@ const RackingSystem = ({ racks, fetchRacks, highlightedSpot, rackRefs, setHighli
             fetchRacks={fetchRacks}
             highlightedSpot={highlightedSpot}
             setHighlightedSpot={setHighlightedSpot}
-            isSpotOccupied={isSpotOccupied} // Pass down the function to check if a spot is occupied
+            RackSpotComponent={RackSpotComponent} // Pass custom RackSpot component
             handleSearch={handleSearch}
           />
         </div>
