@@ -1,20 +1,23 @@
+// src/components/RackingSystem.js
+
 import React from 'react';
 import RackColumn from './RackColumn';
 
-const RackingSystem = ({ racks, fetchRacks, highlightedSpot, rackRefs, setHighlightedSpot ,handleSearch }) => { // Accept handleSearch as props
+const RackingSystem = ({ racks, fetchRacks, highlightedSpot, rackRefs, setHighlightedSpot, isSpotOccupied, handleSearch }) => {
   const columns = ['B1', 'B2', 'B3', 'B4'];
 
   return (
     <div className="racking-system grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-2">
       {columns.map(column => (
-        <div key={column} ref={rackRefs[column]}> {/* Attach ref to each rack */}
+        <div key={column} ref={rackRefs[column]}>
           <RackColumn
             column={column}
             racks={racks.filter(rack => rack.column === column)}
             fetchRacks={fetchRacks}
             highlightedSpot={highlightedSpot}
-            setHighlightedSpot={setHighlightedSpot} // Pass down setHighlightedSpot
-            handleSearch={handleSearch} // Pass down handleSearch
+            setHighlightedSpot={setHighlightedSpot}
+            isSpotOccupied={isSpotOccupied} // Pass down the function to check if a spot is occupied
+            handleSearch={handleSearch}
           />
         </div>
       ))}
