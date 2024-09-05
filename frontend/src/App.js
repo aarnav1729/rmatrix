@@ -14,7 +14,7 @@ function App() {
   const [racks, setRacks] = useState([]);
   const [highlightedSpot, setHighlightedSpot] = useState(null); // New state for highlighted spot
   const [fullSpots, setFullSpots] = useState([]); // State to store spots with exactly 2 QR Codes
-  const [emptySpots, setEmptySpots] = useState([]);
+  const [emptySpots, setEmptySpots] = useState([]); // State to store spots with 0 QR Codes
 
   useEffect(() => {
     fetchRacks();
@@ -27,11 +27,10 @@ function App() {
       setRacks(response.data);
       console.log('Fetched Racks:', response.data); // Debugging log
 
-      // Calculate full spots after fetching racks
       const spotsWithTwoQRCodes = [];
-      // Calculate empty spots after fetching racks
       const spotsWithZeroQRCodes = [];
 
+      // Iterate over each rack and calculate spots with 2 QR codes or 0 QR codes
       response.data.forEach(rack => {
         if (rack.packages.length === 2) {
           spotsWithTwoQRCodes.push({
@@ -41,7 +40,6 @@ function App() {
           });
         }
 
-        // Check for spots with zero QR codes
         if (rack.packages.length === 0) {
           spotsWithZeroQRCodes.push({
             column: rack.column,
@@ -50,8 +48,9 @@ function App() {
           });
         }
       });
-      setFullSpots(spotsWithTwoQRCodes); // Update state with full spots
-      setEmptySpots(spotsWithZeroQRCodes); // Update state with empty spots
+
+      setFullSpots(spotsWithTwoQRCodes);
+      setEmptySpots(spotsWithZeroQRCodes);
     } catch (error) {
       console.error('Error fetching racks:', error);
     }
@@ -59,10 +58,15 @@ function App() {
 
   useEffect(() => {
     if (fullSpots.length > 0) {
-      console.log('Rack Spots with exactly 0 QR Codes:', emptySpots);
       console.log('Rack Spots with exactly 2 QR Codes:', fullSpots);
     }
   }, [fullSpots]); // Log full spots only once after they are calculated
+
+  useEffect(() => {
+    if (emptySpots.length > 0) {
+      console.log('Rack Spots with exactly 0 QR Codes:', emptySpots); // Corrected log placement
+    }
+  }, [emptySpots]); // Log empty spots only once after they are calculated
 
   const handleSearch = (qrCode) => {
     axios.get(`https://rmatrix.onrender.com/api/racks/search?qrCode=${qrCode}`)
@@ -102,7 +106,7 @@ function App() {
           } />
           <Route path="/info" element={<Info />} />
           <Route path="/occupied" element={<Occupied racks={racks} fullSpots={fullSpots} fetchRacks={fetchRacks} />} />
-          <Route path="/empty" element={<Empty racks={racks} />} />
+          <Route path="/empty" element={<Empty racks={racks} emptySpots={emptySpots} fetchRacks={fetchRacks} />} /> {/* Pass emptySpots prop */}
         </Routes>
         <BackToTop />
       </main>
