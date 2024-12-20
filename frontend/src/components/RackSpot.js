@@ -24,7 +24,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, set
     const qrCode = prompt('Enter QR Code:');
     if (qrCode) {
       try {
-        await axios.post('https://rmatrix.onrender.com/api/racks', {
+        await axios.post('https://localhost:5000/api/racks', {
           column,
           row,
           stack,
@@ -55,7 +55,7 @@ const RackSpot = ({ stack, packages, column, row, fetchRacks, isHighlighted, set
 
   const handleDelete = async (index) => {
     const qrCode = qrCodes[index];
-    await axios.delete('https://rmatrix.onrender.com/api/racks', {
+    await axios.delete('https://localhost:5000/api/racks', {
       data: {
         column,
         row,

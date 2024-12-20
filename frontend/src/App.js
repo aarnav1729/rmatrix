@@ -23,7 +23,7 @@ function App() {
   // Fetch racks data and update state
   const fetchRacks = async () => {
     try {
-      const response = await axios.get('https://rmatrix.onrender.com/api/racks');
+      const response = await axios.get('http://localhost:5000/api/racks');
       setRacks(response.data);
       console.log('Fetched Racks:', response.data); // Debugging log
 
@@ -69,7 +69,7 @@ function App() {
   }, [emptySpots]); // Log empty spots only once after they are calculated
 
   const handleSearch = (qrCode) => {
-    axios.get(`https://rmatrix.onrender.com/api/racks/search?qrCode=${qrCode}`)
+    axios.get(`http://localhost:5000/api/racks/search?qrCode=${qrCode}`)
       .then(response => {
         alert(`QR Code found at: ${response.data.location}`);
         const [column, row, stack] = response.data.location.split('-'); // Parse the location string
